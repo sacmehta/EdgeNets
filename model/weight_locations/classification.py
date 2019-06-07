@@ -20,4 +20,4 @@ for sc in dicenet_scales:
 ## ShuffleNetv2 models
 shufflenetv2_scales = [0.5]
 for sc in shufflenetv2_scales:
-    model_weight_map['espnetv2_{}'.format(sc)] = 'model/classification/model_zoo/shufflenetv2/shufflenetv2_s_{}_imagenet_224x224.pth'.format(sc)
+    model_weight_map['shufflenetv2_{}'.format(sc)] = 'model/classification/model_zoo/shufflenetv2/shufflenetv2_s_{}_imagenet_224x224.pth'.format(sc)
