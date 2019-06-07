@@ -1,0 +1,19 @@
+#Install Conda
+wget https://repo.anaconda.com/archive/Anaconda3-5.3.1-Linux-x86_64.sh
+bash Anaconda3-5.3.1-Linux-x86_64.sh
+rm -rf Anaconda3-5.3.1-Linux-x86_64.sh
+
+# down grade to 3.6 because Tensorflow (as of 19 Dec, 2018) does not support v3.7
+conda install python=3.6
+conda install pip
+
+#Install Pytorch
+#conda install pytorch torchvision -c pytorch
+conda install pytorch torchvision cudatoolkit=10.0 -c pytorch
+
+
+#install thre requirements
+pip install -r requirements.txt
+
+# Install opencv
+conda install -c anaconda opencv

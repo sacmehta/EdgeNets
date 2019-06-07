@@ -1,0 +1,2 @@
+cd build
+python build.py build_ext develop
