@@ -68,10 +68,25 @@ EdgeNets
 
 ### Training
 
+We train our segmentation networks in two stages:
+ * In the first stage, we use a low-resolution image as an input so that we can fit a larger batch-size. See below command
+ ```
+ # Cityscapes dataset
+ CUDA_VISIBLE_DEVICES=0 python train_segmentation.py --model espnetv2 --s 2.0 --dataset city --data-path ./vision_datasets/cityscapes/ --batch-size 25 --crop-size 512 256 --model dicenet --s 1.75 --lr 0.009 --scheduler hybrid --clr-max 61 --epochs 100
+ # PASCAL VOC Dataset
+ CUDA_VISIBLE_DEVICES=0 python train_segmentation.py --model espnetv2 --s 2.0 --dataset pascal --data-path ./vision_datasets/pascal_voc/VOCdevkit/ --coco-path ./vision_datasets/coco_preprocess --batch-size 40 --crop-size 256 256 --lr 0.009 --scheduler hybrid --clr-max 61 --epochs 100
+ ```
+ 
+ * In the second stage, we freeze the batch normalization layers and then finetune at a slightly higher image resolution. See below command
+ ``` 
+ # Cityscapes dataset
+ CUDA_VISIBLE_DEVICES=0 python train_segmentation.py --model espnetv2 --s 2.0 --dataset city --data-path ./vision_datasets/cityscapes/ --batch-size 6 --crop-size 1024 512 --lr 0.005 --scheduler hybrid --clr-max 61 --epochs 100 --freeze-bn --finetune <best-model-from-stage1>
+ # PASCAL VOC Dataset
+ CUDA_VISIBLE_DEVICES=0 python train_segmentation.py --model espnetv2 --s 2.0 --dataset pascal --data-path ./vision_datasets/pascal_voc/VOCdevkit/ --coco-path ./vision_datasets/coco_preprocess --batch-size 32 --crop-size 384 384 --lr 0.005 --scheduler hybrid --clr-max 61 --epochs 100 --freeze-bn --finetune <best-model-from-stage1>
+ ```
+
 
 ### Testing
-
-
 
 Similar to image classification, testing can be done in two ways:
  * The first option loads the weights automatically from weight dictionary defined in `/model/weight_locations` and you can use below command to test the models
@@ -88,10 +103,14 @@ CUDA_VISIBLE_DEVICES=0 python test_segmentation.py --model espnetv2 --s 2.0 --da
 CUDA_VISIBLE_DEVICES=0 python test_segmentation.py --model espnetv2 --s 2.0 --dataset city --data-path ../vision_datasets/cityscapes/ --split val --im-size 1024 512 --weights-test model/segmentation/model_zoo/espnetv2/espnetv2_s_2.0_city_1024x512.pth
 ```
 
-
 For evaluation on the PASCAL VOC dataset, use below command:
 ```
 CUDA_VISIBLE_DEVICES=0 python test_segmentation.py --model espnetv2 --s 2.0 --dataset pascal --data-path ../vision_datasets/pascal_voc/VOCdevkit/ --split val --im-size 384 384 
 ```
 
 **NOTE:** Segmentation masks generated using above commands can be directly uploaded to online test servers for evaluation. Obviously, you need to **compress** the folders.
+
+
+### Results
+
+Details about performance of different models are provided [here](model/segmentation/model_zoo/README.md)
