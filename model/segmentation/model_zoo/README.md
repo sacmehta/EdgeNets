@@ -16,13 +16,16 @@
 
 ### PASCAL VOC
 
-| s | Image Size | FLOPs (in million) | Top-1 | Top-5 | Link |
+| s | Image Size | FLOPs (in million) | Params (in million) | mIOU (class-wise) | Link |
 |---|---|---|---|---|---|
-| 0.5 | 224x224 | 28.38 | 57.68 | 79.85 | [here](model/classification/model_zoo/espnetv2/espnetv2_s_0.5_imagenet_224x224.pth) |
-| 1.0 | 224x224 | 85.72 | 66.09 | 86.54 | [here](model/classification/model_zoo/espnetv2/espnetv2_s_1.0_imagenet_224x224.pth) |
-| 1.25 | 224x224 | 123.40 | 67.95 | 87.82 | [here](model/classification/model_zoo/espnetv2/espnetv2_s_1.25_imagenet_224x224.pth) |
-| 1.5 | 224x224 | 168.6 | 69.17 | 88.71 | [here](model/classification/model_zoo/espnetv2/espnetv2_s_1.5_imagenet_224x224.pth) |
-| 2.0 | 224x224 | 284.81 | 72.06 | 90.39 | [here](model/classification/model_zoo/espnetv2/espnetv2_s_2.0_imagenet_224x224.pth) |
+
 
 
 ### Cityscapes
+
+| s | Image Size | FLOPs (in million) | Params (in million) | mIOU (class-wise) | Link |
+|---|---|---|---|---|---|
+| 2. 0 | 512x256 | 674.78 | 0.79 | 50.4 (val) | [here](model/segmentation/model_zoo/espnetv2/espnetv2_s_2.0_city_512x256.pth) |
+| 2. 0 | 1024x512 | 2699.05 | 0.79 | 66.4 (val) | [here](model/segmentation/model_zoo/espnetv2/espnetv2_s_2.0_city_512x256.pth) |
+| 2. 0 | 1024x512 | 2699.05 | 0.79 | 66.2 (test) | [Leaderboard](https://www.cityscapes-dataset.com/benchmarks/) |
+

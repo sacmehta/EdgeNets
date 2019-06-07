@@ -88,8 +88,6 @@ If you want to use the MS-COCO dataset, change the `--dataset imagenet` to `--da
 
 ## Semantic Segmentation
 
-### Training and Testing on the PASCAL VOC
-
 ### Dataset
 
 #### PASCAL VOC 2012
@@ -103,19 +101,6 @@ Follow below steps to download data, including directory set-up:
  bash download_coco.sh
  ```
  * Above commands will download the PASCAL VOC and the COCO datasets and place it in `EdgeNets/vision_datasets` directory.
-```
-.
-EdgeNets
-+-- commons
-+-- data_loader
-+-- loss_fns
-+-- model
-+-- nn_layers
-+-- transforms
-+-- utilities
-+-- vision-datasets
-|   +-- footer.html
-```
  * Next, you need to prepare the COCO dataset in the PASCAL VOC format because you have 80 classes in COCO while PASCAL VOC has only 21 classes including background.
  * After you have successfully downloaded the COCO dataset, execute following commands to prepare COCO dataset in the PASCAL VOC format:
  ```
@@ -147,10 +132,37 @@ pass=''
  python3 generate_mappings.py
  ```
  * Now, you are set for training on the Cityscapes dataset.
+ 
+Once you complete all above steps, directory structure will look like this:
+```
+.
+EdgeNets
++-- commons
++-- data_loader
++-- loss_fns
++-- model
++-- nn_layers
++-- transforms
++-- utilities
++-- vision-datasets
+|   +-- pascal_voc
+|   +-- coco
+|   +-- cityscapes
+|   +-- coco_preprocess
+```
 
 
-### Training and Testing on the CityScapes
+### Training and Testing
 
+#### Training
+
+
+#### Testing
+
+You can test the 
+```
+CUDA_VISIBLE_DEVICES=0 python test_segmentation.py --model espnetv2 --s 2.0 --dataset city --data-path ../vision_datasets/cityscapes/ --split val --im-size 1024 512
+```
 
 ## Object Detection
 
