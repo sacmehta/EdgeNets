@@ -30,7 +30,7 @@ def main(args):
     else:
         print_error_message('{} image size not supported'.format(args.im_size))
 
-    if args.dataset == 'voc':
+    if args.dataset == ['voc', 'pascal']:
         from data_loader.detection.voc import VOC_CLASS_LIST
         num_classes = len(VOC_CLASS_LIST)
     elif args.dataset == 'coco':
