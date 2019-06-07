@@ -15,6 +15,19 @@ This repo contains source code of our paper, DiCENet.
 
 ### Training and Testing on the ImageNet
 
+
+#### Testing
+Testing can be done in two ways:
+ * The first option loads the weights automatically from weight dictionary defined in `/model/weight_locations` and you can use below command to test the models
+
+```
+CUDA_VISIBLE_DEVICES=0 python test_classification.py --model dicenet --s 0.2 --dataset imagenet --data <imagenet-loc>
+```
+ * The second option allows you to specify the location of a pretrained `weights` file, as shown below
+```
+CUDA_VISIBLE_DEVICES=0 python test_classification.py --model dicenet --s 0.2 --dataset imagenet --data <imagenet-loc> --weights <weights-loc
+```
+
 ### Training and Testing on the MS-COCO
 
 
