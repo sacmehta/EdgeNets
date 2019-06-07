@@ -18,6 +18,6 @@ segmentation_loss_fns = ['ce', 'bce']
 
 # detection related details
 
-detection_datasets = ['coco', 'voc']
+detection_datasets = ['coco', 'pascal']
 detection_models = ['espnetv2', 'dicenet']
 detection_schedulers = ['poly', 'hybrid', 'clr', 'cosine']

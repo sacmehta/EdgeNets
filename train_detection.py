@@ -29,7 +29,7 @@ def main(args):
     target_transform = MatchPrior(PriorBox(cfg)(), cfg.center_variance, cfg.size_variance, cfg.iou_threshold)
     val_transform = ValTransform(cfg.image_size)
 
-    if args.dataset == 'voc':
+    if args.dataset in ['voc', 'pascal']:
         from data_loader.detection.voc import VOCDataset, VOC_CLASS_LIST
         train_dataset_2007 = VOCDataset(root_dir=args.data_path, transform=train_transform,
                                         target_transform=target_transform,
@@ -178,7 +178,7 @@ if __name__ == '__main__':
 
     ### General configuration such as dataset path, etc
     parser.add_argument('--save', default='results_detection', type=str, help='results path')
-    parser.add_argument('--dataset', default='voc', choices=detection_datasets, help='Name of the dataset')
+    parser.add_argument('--dataset', default='pascal', choices=detection_datasets, help='Name of the dataset')
     parser.add_argument('--data-path', default='', help='Dataset path')
 
     #### OPTIMIZER related settings

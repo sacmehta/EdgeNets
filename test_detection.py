@@ -121,7 +121,7 @@ if __name__ == '__main__':
                         help='initialized model path')
     parser.add_argument('--s', default=2.0, type=float, help='Model scale factor')
     parser.add_argument('--save', default='results_detection', type=str, help='results path')
-    parser.add_argument('--dataset', default='voc', choices=detection_datasets, help='Name of the dataset')
+    parser.add_argument('--dataset', default='pascal', choices=detection_datasets, help='Name of the dataset')
     parser.add_argument('--data-path', default='', help='Dataset path')
     parser.add_argument('--weights-test', default='', help='model weights')
     parser.add_argument('--im-size', default=300, type=int, help='Image size for training')
