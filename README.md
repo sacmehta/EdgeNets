@@ -14,7 +14,7 @@ This repo contains source code of our work on designing efficient networks for d
 Some of our relevant papers are:
  * [ESPNet (ECCV'18)](https://arxiv.org/abs/1803.06815)
  * [ESPNetv2 (CVPR'19)](https://arxiv.org/abs/1811.11431)
- * [DiCENet (arxiv)]()
+ * [DiCENet (arxiv)](Coming soon)
  
 If you find this repository helpful, please feel free to cite our work:
 ```
@@ -42,6 +42,11 @@ If you find this repository helpful, please feel free to cite our work:
  * Supports PyTorch 1.0
  * Integrated with Tensorboard for easy visualization of training logs. 
  * Scripts for downloading different datasets.
+ 
+## Blogs
+
+ * [Faster Training for Efficient Networks](https://medium.com/p/faster-training-of-efficient-cnns-657953aa080?source=email-dc17ff22fa63--writer.postDistributed&sk=f60110289b6157de4c9e0c00c77f51e9)
+ * [Semantic segmentation using ESPNetv2](https://medium.com/@sachinmehta.ngb/espnetv2-for-semantic-segmentation-9e80f155d522?source=friends_link&sk=91bca9326b088a972c170d1f7f5063e8)
  
  
 ## Image Classification
