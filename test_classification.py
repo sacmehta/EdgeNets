@@ -13,17 +13,14 @@ __maintainer__ = "Sachin Mehta"
 
 def main(args):
     # create model
-    if args.model == 'basic_dw':
-        from model.classification import basic_dw as net
-        model = net.CNNModel(args)
-    elif args.model == 'basic_vw':
-        from model.classification import basic_vw as net
-        model = net.CNNModel(args)
-    elif args.model == 'shuffle_dw':
-        from model.classification import shufflenetv2 as net
-        model = net.CNNModel(args)
-    elif args.model == 'shuffle_vw':
+    if args.model == 'dicenet':
         from model.classification import dicenet as net
+        model = net.CNNModel(args)
+    elif args.model == 'espnet':
+        from model.classification import espnetv2 as net
+        model = net.EESPNet(args)
+    elif args.model == 'shufflenetv2':
+        from model.classification import shufflenetv2 as net
         model = net.CNNModel(args)
     else:
         NotImplementedError('Model {} not yet implemented'.format(args.model))
@@ -58,18 +55,20 @@ def main(args):
 
 
 if __name__ == '__main__':
-    model_names = ['basic_dw', 'basic_vw', 'shuffle_dw', 'shuffle_vw']
+    from commons.general_details import classification_models, classification_datasets
 
     parser = argparse.ArgumentParser(description='Testing efficient networks')
     parser.add_argument('--workers', default=4, type=int, help='number of data loading workers (default: 4)')
     parser.add_argument('--data', default='', help='path to dataset')
+    parser.add_argument('--dataset', default='imagenet', help='Name of the dataset', choices=classification_datasets)
+
     parser.add_argument('--batch-size', default=512, type=int, help='mini-batch size (default: 256)')
     parser.add_argument('--num-classes', default=1000, type=int, help='# of classes in the dataset')
     parser.add_argument('--s', default=1, type=float, help='Factor by which output channels should be reduced (s > 1 for increasing the dims while < 1 for decreasing)')
     parser.add_argument('--weights', type=str, default='', help='weight file')
     parser.add_argument('--inpSize', default=224, type=int, help='Input size')
     ##Select a model
-    parser.add_argument('--model', default='basic', choices=model_names, help='Which model? basic= basic CNN model, res=resnet style, shuffle=shufflenetv2 style)')
+    parser.add_argument('--model', default='basic', choices=classification_models, help='Which model? basic= basic CNN model, res=resnet style, shuffle=shufflenetv2 style)')
     parser.add_argument('--model-width', default=224, type=int, help='Model width')
     parser.add_argument('--model-height', default=224, type=int, help='Model height')
     parser.add_argument('--channels', default=3, type=int, help='Input channels')

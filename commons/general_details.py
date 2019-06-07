@@ -6,7 +6,7 @@ __maintainer__ = "Sachin Mehta"
 # classification related details
 classification_datasets = ['imagenet', 'coco']
 classification_schedulers = ['fixed', 'clr', 'hybrid', 'linear', 'poly']
-classification_models = ['shuffle_dw', 'dicenet']
+classification_models = ['espnetv2', 'dicenet']
 classification_exp_choices = ['main', 'ablation']
 
 # segmentation related details
