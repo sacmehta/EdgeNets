@@ -15,6 +15,17 @@ This repo contains source code of our paper, DiCENet.
 
 ### Training and Testing on the ImageNet
 
+### Training
+For smaller models (< 80 MFLOPs), we used a scale augmentation of `(0.2, 1.0)` while for other models, we used a scale augmentation of `(0.08, 1.0)`
+
+For training, you can use below command
+``` 
+CUDA_VISIBLE_DEVICES=0,1,2,3 python train_classification.py --s $s --model <model> --scheduler <scheduler> --data <data-path> --dataset imagenet --scale <scale>
+```
+Example for DiCENet with a network width scaling factor of 0.2 model is shown below.
+```
+CUDA_VISIBLE_DEVICES=0,1,2,3 python train_classification.py --s 0.2 --model dicenet --scheduler hybrid --epochs 120 --clr-max 61 --data ./imagenet --scale 0.2 1.0 
+``` 
 
 #### Testing
 Testing can be done in two ways:

@@ -47,7 +47,6 @@ def main(args):
     model.load_state_dict(weight_dict)
 
     if num_gpus >= 1:
-        args.data_parallel = True
         model = torch.nn.DataParallel(model)
         model = model.cuda()
         if torch.backends.cudnn.is_available():
@@ -67,14 +66,13 @@ if __name__ == '__main__':
     parser.add_argument('--workers', default=4, type=int, help='number of data loading workers (default: 4)')
     parser.add_argument('--data', default='', help='path to dataset')
     parser.add_argument('--dataset', default='imagenet', help='Name of the dataset', choices=classification_datasets)
-
-    parser.add_argument('--batch-size', default=512, type=int, help='mini-batch size (default: 256)')
+    parser.add_argument('--batch-size', default=512, type=int, help='mini-batch size (default: 512)')
     parser.add_argument('--num-classes', default=1000, type=int, help='# of classes in the dataset')
-    parser.add_argument('--s', default=1, type=float, help='Factor by which output channels should be reduced (s > 1 for increasing the dims while < 1 for decreasing)')
+    parser.add_argument('--s', default=1, type=float, help='Width scaling factor')
     parser.add_argument('--weights', type=str, default='', help='weight file')
     parser.add_argument('--inpSize', default=224, type=int, help='Input size')
     ##Select a model
-    parser.add_argument('--model', default='basic', choices=classification_models, help='Which model? basic= basic CNN model, res=resnet style, shuffle=shufflenetv2 style)')
+    parser.add_argument('--model', default='dicenet', choices=classification_models, help='Which model?')
     parser.add_argument('--model-width', default=224, type=int, help='Model width')
     parser.add_argument('--model-height', default=224, type=int, help='Model height')
     parser.add_argument('--channels', default=3, type=int, help='Input channels')
