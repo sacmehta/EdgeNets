@@ -204,7 +204,7 @@ if __name__ == "__main__":
 
     args.classes = 21
     args.s = 2.0
-    args.weights='../classification/model_zoo/espnet/espnetv2_s_2.0.pth'
+    args.weights='../classification/model_zoo/espnet/espnetv2_s_2.0_imagenet_224x224.pth'
     args.dataset='pascal'
 
     input = torch.Tensor(1, 3, 384, 384)

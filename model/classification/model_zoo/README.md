@@ -19,10 +19,10 @@
 
 | s | Image Size | FLOPs (in million) | Top-1 | Top-5 | Link |
 |---|---|---|---|---|---|
-| 0.5 | 224x224 |  |  |  | [here](/model/classification/model_zoo/espnetv2/espnetv2_s_0.5.pth) |
-| 1.0 | 224x224 |  |  |  | [here](/model/classification/model_zoo/espnetv2/espnetv2_s_1.0.pth) |
-| 1.25 | 224x224 |  |  |  | [here](/model/classification/model_zoo/espnetv2/espnetv2_s_1.25.pth) |
-| 1.5 | 224x224 |  |  |  | [here](/model/classification/model_zoo/espnetv2/espnetv2_s_1.5.pth) |
-| 2.0 | 224x224 |  |  |  | [here](/model/classification/model_zoo/espnetv2/espnetv2_s_2.0.pth) |
+| 0.5 | 224x224 |  |  |  | [here](/model/classification/model_zoo/espnetv2/espnetv2_s_0.5_imagenet_224x224.pth) |
+| 1.0 | 224x224 |  |  |  | [here](/model/classification/model_zoo/espnetv2/espnetv2_s_1.0_imagenet_224x224.pth) |
+| 1.25 | 224x224 |  |  |  | [here](/model/classification/model_zoo/espnetv2/espnetv2_s_1.25_imagenet_224x224.pth) |
+| 1.5 | 224x224 |  |  |  | [here](/model/classification/model_zoo/espnetv2/espnetv2_s_1.5_imagenet_224x224.pth) |
+| 2.0 | 224x224 | 284.81 | 72.06 | 90.39 | [here](/model/classification/model_zoo/espnetv2/espnetv2_s_2.0_imagenet_224x224.pth) |
 
 
