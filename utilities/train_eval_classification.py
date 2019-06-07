@@ -67,10 +67,10 @@ Validation loop
 '''
 def validate(data_loader, model, criteria=None, device='cuda'):
     batch_time = AverageMeter()
-    losses = AverageMeter()
     top1 = AverageMeter()
     top5 = AverageMeter()
-
+    if criteria:
+        losses = AverageMeter()
     # switch to evaluate mode
     model.eval()
 
@@ -85,13 +85,12 @@ def validate(data_loader, model, criteria=None, device='cuda'):
             output = model(input)
             if criteria:
                 loss = criteria(output, target)
-            else:
-                loss = 0.0
 
             # measure accuracy and record loss
             prec1, prec5 = accuracy(output, target, topk=(1, 5))
 
-            losses.update(loss.item(), input.size(0))
+            if criteria:
+                losses.update(loss.item(), input.size(0))
             top1.update(prec1[0].item(), input.size(0))
             top5.update(prec5[0].item(), input.size(0))
 
