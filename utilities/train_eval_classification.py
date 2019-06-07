@@ -109,7 +109,10 @@ def validate(data_loader, model, criteria=None, device='cuda'):
 
         print_info_message(' * Prec@1:%.3f Prec@5:%.3f' % (top1.avg, top5.avg))
 
-        return top1.avg, losses.avg
+        if criteria:
+            return top1.avg, losses.avg
+        else:
+            return top1.avg
 
 
 def train_multi(data_loader, model, criteria, optimizer, epoch, device='cuda'):
