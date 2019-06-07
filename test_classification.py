@@ -4,6 +4,7 @@ from utilities.utils import model_parameters, compute_flops
 from utilities.train_eval_classification import validate
 import os
 from data_loader.classification.imagenet import val_loader as loader
+from utilities.print_utils import *
 #============================================
 __author__ = "Sachin Mehta"
 __license__ = "MIT"
@@ -28,12 +29,17 @@ def main(args):
 
     num_params = model_parameters(model)
     flops = compute_flops(model)
-    print('FLOPs: {:.2f} million'.format(flops))
-    print('Network Parameters: {:.2f} million'.format(num_params))
+    print_info_message('FLOPs: {:.2f} million'.format(flops))
+    print_info_message('Network Parameters: {:.2f} million'.format(num_params))
 
-    if not os.path.isfile(args.weights):
-        print('Weight file does not exist at {}'.format(args.weights))
-        exit(-1)
+
+    if not args.weights:
+        print_info_message('Grabbing location of the ImageNet weights from the weight dictionary')
+        from model.weight_locations.classification import model_weight_map
+
+        weight_file_key = '{}_{}'.format(args.model, args.s)
+        assert weight_file_key in model_weight_map.keys(), '{} does not exist'.format(weight_file_key)
+        args.weights_ft = model_weight_map[weight_file_key]
 
     num_gpus = torch.cuda.device_count()
     device = 'cuda' if num_gpus >=1 else 'cpu'
