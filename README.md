@@ -57,7 +57,7 @@ Details about performance of different models are provided [here](model/segmenta
 
 ## Object Detection
 
-Coming soon
+Details about training and testing are provided [here](README_Detection.md).
 
 
 ## Acknowledgements

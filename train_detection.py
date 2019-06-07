@@ -169,7 +169,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Training detection network')
     ### MODEL RELATED PARAMS
     parser.add_argument('--resume', action='store_true', help='resume from checkpoint')
-    parser.add_argument('--model', default='espnet', choices=detection_models, type=str, help='initialized model path')
+    parser.add_argument('--model', default='espnetv2', choices=detection_models, type=str, help='initialized model path')
     parser.add_argument('--s', default=2.0, type=float, help='Model scale factor')
     parser.add_argument('--channels', default=3, type=int, help='Input channels')
     # dimension wise network related params
