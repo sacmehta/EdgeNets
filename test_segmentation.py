@@ -161,7 +161,7 @@ if __name__ == '__main__':
 
     parser = ArgumentParser()
     # mdoel details
-    parser.add_argument('--model', default="espnet", choices=segmentation_models, help='Model name')
+    parser.add_argument('--model', default="espnetv2", choices=segmentation_models, help='Model name')
     parser.add_argument('--weights-test', default='', help='Pretrained weights directory.')
     parser.add_argument('--s', default=2.0, type=float, help='scale')
     # dataset details

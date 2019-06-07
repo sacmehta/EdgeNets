@@ -12,12 +12,12 @@ classification_exp_choices = ['main', 'ablation']
 # segmentation related details
 segmentation_schedulers = ['poly', 'fixed', 'clr', 'linear', 'hybrid']
 segmentation_datasets = ['pascal', 'city']
-segmentation_models = ['espnet', 'dicenet']
+segmentation_models = ['espnetv2', 'dicenet']
 segmentation_loss_fns = ['ce', 'bce']
 
 
 # detection related details
 
 detection_datasets = ['coco', 'voc']
-detection_models = ['espnet', 'dicenet']
+detection_models = ['espnetv2', 'dicenet']
 detection_schedulers = ['poly', 'hybrid', 'clr', 'cosine']
