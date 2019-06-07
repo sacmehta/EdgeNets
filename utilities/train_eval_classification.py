@@ -83,7 +83,10 @@ def validate(data_loader, model, criteria, device='cuda'):
 
             # compute output
             output = model(input)
-            loss = criteria(output, target)
+            if criteria:
+                loss = criteria(output, target)
+            else:
+                loss = 0.0
 
             # measure accuracy and record loss
             prec1, prec5 = accuracy(output, target, topk=(1, 5))
@@ -96,7 +99,7 @@ def validate(data_loader, model, criteria, device='cuda'):
             batch_time.update(time.time() - end)
             end = time.time()
 
-            if i % 10 == 0: # print after every 100 batches
+            if i % 10 == 0 and criteria: # print after every 100 batches
                 print_log_message("Batch:[%d/%d]\t\tBatchTime:%.3f\t\tLoss:%.3f\t\ttop1:%.3f (%.3f)\t\ttop5:%.3f(%.3f)" %
                                   (i, len(data_loader), batch_time.avg, losses.avg, top1.val, top1.avg, top5.val, top5.avg))
 
