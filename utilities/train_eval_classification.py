@@ -101,6 +101,11 @@ def validate(data_loader, model, criteria=None, device='cuda'):
             if i % 10 == 0 and criteria: # print after every 100 batches
                 print_log_message("Batch:[%d/%d]\t\tBatchTime:%.3f\t\tLoss:%.3f\t\ttop1:%.3f (%.3f)\t\ttop5:%.3f(%.3f)" %
                                   (i, len(data_loader), batch_time.avg, losses.avg, top1.val, top1.avg, top5.val, top5.avg))
+            elif i % 10:
+                print_log_message(
+                    "Batch:[%d/%d]\t\tBatchTime:%.3f\t\ttop1:%.3f (%.3f)\t\ttop5:%.3f(%.3f)" %
+                    (i, len(data_loader), batch_time.avg, top1.val, top1.avg, top5.val, top5.avg))
+
 
         print_info_message(' * Prec@1:%.3f Prec@5:%.3f' % (top1.avg, top5.avg))
 
