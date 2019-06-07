@@ -57,7 +57,7 @@ def main(args):
 
     # Data loading code
     val_loader = loader(args)
-    validate(val_loader, model, device=device)
+    validate(val_loader, model, criteria=None, device=device)
 
 
 if __name__ == '__main__':

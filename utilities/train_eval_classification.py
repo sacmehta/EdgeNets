@@ -65,7 +65,7 @@ def train(data_loader, model, criteria, optimizer, epoch, device='cuda'):
 '''
 Validation loop
 '''
-def validate(data_loader, model, criteria, device='cuda'):
+def validate(data_loader, model, criteria=None, device='cuda'):
     batch_time = AverageMeter()
     losses = AverageMeter()
     top1 = AverageMeter()
