@@ -124,7 +124,7 @@ def main(args):
 
     print_info_message('# of images for testing: {}'.format(len(image_list)))
 
-    if args.model == 'espnet':
+    if args.model == 'espnetv2':
         from model.segmentation.espnetv2 import espnetv2_seg
         args.classes = seg_classes
         model = espnetv2_seg(args)
