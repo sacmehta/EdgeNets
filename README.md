@@ -48,6 +48,11 @@ If you find this repository helpful, please feel free to cite our work:
 
 ### Training and Testing on the ImageNet
 
+This repository supports training and testing of following models:
+ * [DiCENet]()
+ * [ESPNetv2 (CVPR'19)](https://arxiv.org/abs/1811.11431)
+ * [ShuffleNetv2 (ECCV'18)](https://arxiv.org/abs/1807.11164)
+
 ### Training
 For smaller models (< 80 MFLOPs), we used a scale augmentation of `(0.2, 1.0)` while for other models, we used a scale augmentation of `(0.08, 1.0)`
 

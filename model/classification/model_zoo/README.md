@@ -30,7 +30,7 @@
 
 | s | Image Size | FLOPs (in million) | Top-1 | Top-5 | Link |
 |---|---|---|---|---|---|
-| 0.5 | 224x224 |  |  |  | [here](model/classification/model_zoo/shufflenetv2/shufflenetv2_s_0.5_imagenet_224x224.pth) |
+| 0.5 | 224x224 | 40.48 | 59.69 | 81.73 | [here](model/classification/model_zoo/shufflenetv2/shufflenetv2_s_0.5_imagenet_224x224.pth) |
 
 
 
