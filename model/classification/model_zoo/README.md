@@ -12,7 +12,7 @@
 | 1.25 | 224x224 | 98.11 | 67.77 | 87.64 | [here](/model/classification/model_zoo/dicenet/dicenet_s_1.25_imagenet_224x224.pth) |
 | 1.5 | 224x224 | 135.48 | 69.51 | 88.76 | [here](/model/classification/model_zoo/dicenet/dicenet_s_1.5_imagenet_224x224.pth) |
 | 1.75 | 224x224 | 182.24 | 70.26 | 89.33 | [here](/model/classification/model_zoo/dicenet/dicenet_s_1.75_imagenet_224x224.pth) |
-| 2.0 | 224x224 | 236.29 |  |  | [here](/model/classification/model_zoo/dicenet/dicenet_s_2.0_imagenet_224x224.pth) |
+| 2.0 | 224x224 | 236.29 | 70.99 | 89.80 | [here](/model/classification/model_zoo/dicenet/dicenet_s_2.0_imagenet_224x224.pth) |
 
 
 ## ESPNetv2 models

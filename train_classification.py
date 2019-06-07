@@ -24,24 +24,15 @@ def main(args):
     # -----------------------------------------------------------------------------
     # Create model
     # -----------------------------------------------------------------------------
-    if args.model == 'basic_dw':
-        from model.classification import basic_dw as net
-        model = net.CNNModel(args)
-    elif args.model == 'basic_vw':
-        from model.classification import basic_vw as net
-        model = net.CNNModel(args)
-    elif args.model == 'shuffle_dw':
-        from model.classification import shufflenetv2 as net
-        model = net.CNNModel(args)
-    elif args.model == 'e_shuffle_dw':
-        from model.classification import eff_shuffle_dw as net
-        model = net.CNNModel(args)
-    elif args.model == 'dicenet':
+    if args.model == 'dicenet':
         from model.classification import dicenet as net
         model = net.CNNModel(args)
-    elif args.model == 'espnet':
+    elif args.model == 'espnetv2':
         from model.classification import espnetv2 as net
-        model = net.EESPNet(classes=args.num_classes, s=args.s)
+        model = net.EESPNet(args)
+    elif args.model == 'shufflenetv2':
+        from model.classification import shufflenetv2 as net
+        model = net.CNNModel(args)
     else:
         print_error_message('Model {} not yet implemented'.format(args.model))
         exit()

@@ -17,7 +17,7 @@ def main(args):
     if args.model == 'dicenet':
         from model.classification import dicenet as net
         model = net.CNNModel(args)
-    elif args.model == 'espnet':
+    elif args.model == 'espnetv2':
         from model.classification import espnetv2 as net
         model = net.EESPNet(args)
     elif args.model == 'shufflenetv2':
