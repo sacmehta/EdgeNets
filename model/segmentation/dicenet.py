@@ -214,7 +214,7 @@ if __name__ == "__main__":
                 print_info_message('Scale: {}, Input: {}, FLOPs: {}, Params: {}'.format(scale, size,
                                                                                         compute_flops(model, input=input),
                                                                                         model_parameters(model)))
-                
+
 
         #for size in [224]:
         #input = torch.Tensor(1, 3, 256, 256)
