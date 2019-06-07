@@ -198,7 +198,6 @@ if __name__ == "__main__":
     from model.weight_locations import segmentation
 
     args.num_classes = 1000
-    args.s = 2.0
     args.weights = ''
     args.dataset = 'pascal'
     args.channels = 3
@@ -212,7 +211,11 @@ if __name__ == "__main__":
             for size in [256, 384]:
                 model = dicenet_seg(args, classes=21)
                 input = torch.Tensor(1, 3, size, size)
-                print_info_message('Scale: {}, Input: {}, FLOPs: {}'.format(scale, size, compute_flops(model, input=input)))
+                print_info_message('Scale: {}, Input: {}, FLOPs: {}, Params: {}'.format(scale, size,
+                                                                                        compute_flops(model, input=input),
+                                                                                        model_parameters(model)))
+                
+
         #for size in [224]:
         #input = torch.Tensor(1, 3, 256, 256)
         #model = dicenet_seg(args, classes=21)

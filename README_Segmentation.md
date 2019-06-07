@@ -71,7 +71,27 @@ EdgeNets
 
 ### Testing
 
-You can test the 
+
+
+Similar to image classification, testing can be done in two ways:
+ * The first option loads the weights automatically from weight dictionary defined in `/model/weight_locations` and you can use below command to test the models
+
 ```
+# Evaluating on the validation set
 CUDA_VISIBLE_DEVICES=0 python test_segmentation.py --model espnetv2 --s 2.0 --dataset city --data-path ../vision_datasets/cityscapes/ --split val --im-size 1024 512
+# Evaluating on the test set
+CUDA_VISIBLE_DEVICES=0 python test_segmentation.py --model espnetv2 --s 2.0 --dataset city --data-path ../vision_datasets/cityscapes/ --split test --im-size 1024 512
 ```
+
+ * The second option allows you to specify the location of a pretrained `--weights-test` file, as shown below
+```
+CUDA_VISIBLE_DEVICES=0 python test_segmentation.py --model espnetv2 --s 2.0 --dataset city --data-path ../vision_datasets/cityscapes/ --split val --im-size 1024 512 --weights-test model/segmentation/model_zoo/espnetv2/espnetv2_s_2.0_city_1024x512.pth
+```
+
+
+For evaluation on the PASCAL VOC dataset, use below command:
+```
+CUDA_VISIBLE_DEVICES=0 python test_segmentation.py --model espnetv2 --s 2.0 --dataset pascal --data-path ../vision_datasets/pascal_voc/VOCdevkit/ --split val --im-size 384 384 
+```
+
+**NOTE:** Segmentation masks generated using above commands can be directly uploaded to online test servers for evaluation. Obviously, you need to **compress** the folders.
