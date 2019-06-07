@@ -1,6 +1,39 @@
 # DiCENet: Depth-wise Convolutions for Efficient Networks
 
-This repo contains source code of our paper, DiCENet.
+This repo contains source code of our work on designing efficient networks for different computer vision tasks: 
+ * Image classification
+    * Single-label classification on the ImageNet dataset
+    * Multi-label classification on the MS-COCO dataset
+ * Semantic segmentation
+    * PASCAL VOC
+    * Cityscapes
+ * Object detection
+    * PASCAL VOC
+    * MS-COCO 
+
+Some of our relevant papers are:
+ * [ESPNet (ECCV'18)](https://arxiv.org/abs/1803.06815)
+ * [ESPNetv2 (CVPR'19)](https://arxiv.org/abs/1811.11431)
+ * [DiCENet (arxiv)]()
+ 
+If you find this repository helpful, please feel free to cite our work:
+```
+@inproceedings{mehta2018espnet,
+  title={Espnet: Efficient spatial pyramid of dilated convolutions for semantic segmentation},
+  author={Mehta, Sachin and Rastegari, Mohammad and Caspi, Anat and Shapiro, Linda and Hajishirzi, Hannaneh},
+  booktitle={Proceedings of the European Conference on Computer Vision (ECCV)},
+  pages={552--568},
+  year={2018}
+}
+
+@inproceedings{mehta2018espnetv2,
+  title={ESPNetv2: A Light-weight, Power Efficient, and General Purpose Convolutional Neural Network},
+  author={Mehta, Sachin and Rastegari, Mohammad and Shapiro, Linda and Hajishirzi, Hannaneh},
+  booktitle={Proceedings of the IEEE conference on computer vision and pattern recognition},
+  year={2019}
+}
+
+```
 
 **Key highlights**
  * Object classification on the ImageNet and MS-COCO (multi-label)
