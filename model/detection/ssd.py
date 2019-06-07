@@ -42,9 +42,9 @@ class SSDExtraLayers(nn.Module):
 class SSD300(nn.Module):
     def __init__(self, args, cfg):
         super(SSD300, self).__init__()
-        if args.model == 'espnet':
+        if args.model == 'espnetv2':
             self.base_net = ESPNetv2SSD300(args, extra_layer=SSDExtraLayers)
-        elif args.model == 'shuffle_vw':
+        elif args.model == 'dicenet':
             from model.detection.dicenet import SSDNet300
             self.base_net = SSDNet300(args, extra_layer=SSDExtraLayers)
         else:
@@ -104,9 +104,9 @@ class SSD300(nn.Module):
 class SSD512(nn.Module):
     def __init__(self, args, cfg, basenet_classes=1000):
         super(SSD512, self).__init__()
-        if args.model == 'espnet':
+        if args.model == 'espnetv2':
             self.base_net = ESPNetv2SSD512(args, extra_layer=SSDExtraLayers)
-        elif args.model == 'shuffle_vw':
+        elif args.model == 'dicenet':
             from model.detection.dicenet import SSDNet512
             self.base_net = SSDNet512(args, extra_layer=SSDExtraLayers)
         else:

@@ -18,16 +18,15 @@ def nms(box_scores, nms_threshold, top_k=200):
     scores = box_scores[:, -1]
     boxes = box_scores[:, :-1]
     try:
-        import fastnms
-        _nms = fastnms.nms
+        # check if torchvision nms is available or not
+        # if not, switch to CPU version
+        from torchvision.ops import nms as _nms
         keep = _nms(boxes, scores, nms_threshold)
-        print('Here')
-        exit()
+
         if top_k > 0:
             keep = keep[:top_k]
         return box_scores[keep, :]
     except:
-        # this version of nms is slower on GPU, so we move data to CPU.
         scores = scores.to('cpu')
         boxes = boxes.to('cpu')
         keep = []

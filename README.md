@@ -1,4 +1,4 @@
-# DiCENet: Depth-wise Convolutions for Efficient Networks
+# Efficient networks for Computer Vision
 
 This repo contains source code of our work on designing efficient networks for different computer vision tasks: 
  * Image classification
@@ -56,4 +56,10 @@ Details about performance of different models are provided [here](model/segmenta
 
 
 ## Object Detection
+
+Coming soon
+
+
+## Acknowledgements
+Most of our object detection code is adapted from [SSD in pytorch](https://github.com/amdegroot/ssd.pytorch). We thank authors for such an amazing work.
 

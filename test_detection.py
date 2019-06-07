@@ -117,9 +117,9 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Training detection network')
     parser.add_argument('--resume', action='store_true', help='resume from checkpoint')
-    parser.add_argument('--model', default='shuffle_vw', choices=detection_models, type=str,
+    parser.add_argument('--model', default='espnetv2', choices=detection_models, type=str,
                         help='initialized model path')
-    parser.add_argument('--s', default=0.75, type=float, help='Model scale factor')
+    parser.add_argument('--s', default=2.0, type=float, help='Model scale factor')
     parser.add_argument('--save', default='results_detection', type=str, help='results path')
     parser.add_argument('--dataset', default='voc', choices=detection_datasets, help='Name of the dataset')
     parser.add_argument('--data-path', default='', help='Dataset path')
