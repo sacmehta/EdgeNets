@@ -39,7 +39,7 @@ def main(args):
 
         weight_file_key = '{}_{}'.format(args.model, args.s)
         assert weight_file_key in model_weight_map.keys(), '{} does not exist'.format(weight_file_key)
-        args.weights_ft = model_weight_map[weight_file_key]
+        args.weights = model_weight_map[weight_file_key]
 
     num_gpus = torch.cuda.device_count()
     device = 'cuda' if num_gpus >=1 else 'cpu'
