@@ -65,7 +65,7 @@ Details about performance of different models are provided [here](model/segmenta
 Details about training and testing are provided [here](README_Detection.md).
 
 ## License
-By downloading this software, you acknowledge that you agree to the terms and conditions given [here](License)
+By downloading this software, you acknowledge that you agree to the terms and conditions given [here](License).
 
 
 ## Acknowledgements
