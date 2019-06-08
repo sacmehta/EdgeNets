@@ -20,7 +20,7 @@ This repo contains source code of our work on designing efficient networks for d
 
 Below figure compares the performance of DiCENet with other efficient networks on the ImageNet dataset.
 
-![DiCENet performance on the ImageNet](/images/dicenet_imagenet.png | width=100)
+![DiCENet performance on the ImageNet](/images/dicenet_imagenet.png)
 
 ## Citation
 If you find this repository helpful, please feel free to cite our work:
