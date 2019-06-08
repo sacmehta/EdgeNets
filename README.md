@@ -11,11 +11,12 @@ This repo contains source code of our work on designing efficient networks for d
     * PASCAL VOC
     * MS-COCO 
 
-Some of our relevant papers are:
+## Relevant papers
  * [ESPNet (ECCV'18)](https://arxiv.org/abs/1803.06815)
  * [ESPNetv2 (CVPR'19)](https://arxiv.org/abs/1811.11431)
  * [DiCENet (arxiv)](Coming soon)
- 
+
+## Citation
 If you find this repository helpful, please feel free to cite our work:
 ```
 @inproceedings{mehta2018espnet,
