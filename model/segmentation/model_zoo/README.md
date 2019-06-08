@@ -20,7 +20,7 @@
 | 0.2 | 384x384 | 135.64 | 0.05 | 34.52 | [here](/model/segmentation/model_zoo/dicenet/dicenet_s_0.2_pascal_384x384.pth) |
 | 0.5 | 384x384 | 182.91 | 0.08 | 47.74 | [here](/model/segmentation/model_zoo/dicenet/dicenet_s_0.5_pascal_384x384.pth) |
 | 0.75 | 384x384 | 282.05 | 0.19 | 55.67 | [here](/model/segmentation/model_zoo/dicenet/dicenet_s_0.75_pascal_384x384.pth) |
-| 1.0 | 384x384 | 312.76 | 0.28 | |  |
+| 1.0 | 384x384 | 312.76 | 0.28 | 60.23 | [here](/model/segmentation/model_zoo/dicenet/dicenet_s_1.0_pascal_384x384.pth) |
 | 1.25 | 384x384 | 342.52 | 0.39 | 62.55 | [here](/model/segmentation/model_zoo/dicenet/dicenet_s_1.25_pascal_384x384.pth) |
 | 1.75 | 384x384 | 641.98 | 0.81 | 64.76 | [here](/model/segmentation/model_zoo/dicenet/dicenet_s_1.75_pascal_384x384.pth) |
 | -- | 384x384 | 680 | -- | 66.50 | [Leaderboard](http://host.robots.ox.ac.uk:8080/anonymous/Q8DARH.html) |
