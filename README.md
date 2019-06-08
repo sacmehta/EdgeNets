@@ -25,7 +25,7 @@ Below figure compares the performance of DiCENet with other efficient networks o
 
 ### Semantic Segmentation
 
-Below figure compares the performance of ESPNet and ESPNetv2 on two different datasets. Note that ESPNets are one of the first efficient networks that delivers competitive performance to existing networks on the PASCAL VOC dataset. See [here](model/segmentation/model_zoo/README.md) for more details.
+Below figure compares the performance of ESPNet and ESPNetv2 on two different datasets. Note that ESPNets are one of the first efficient networks that delivers competitive performance to existing networks on the PASCAL VOC dataset, even with low resolution images say 256x256. See [here](model/segmentation/model_zoo/README.md) for more details.
 
 ![ESPNets performance](/images/perf_espnet.png)
 
