@@ -18,7 +18,7 @@ This repo contains source code of our work on designing efficient networks for d
  
 ## Performance comparison
 
-Below figure compares the performance of DiCENet with other efficient networks on the ImageNet dataset.
+Below figure compares the performance of DiCENet with other efficient networks on the ImageNet dataset. DiCENet outperforms all existing efficient networks, including MobileNetv2 and ShuffleNetv2.
 
 ![DiCENet performance on the ImageNet](/images/dicenet_imagenet.png)
 
