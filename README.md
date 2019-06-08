@@ -18,9 +18,16 @@ This repo contains source code of our work on designing efficient networks for d
  
 ## Performance comparison
 
+### ImageNet
 Below figure compares the performance of DiCENet with other efficient networks on the ImageNet dataset. DiCENet outperforms all existing efficient networks, including MobileNetv2 and ShuffleNetv2.
 
 ![DiCENet performance on the ImageNet](/images/dicenet_imagenet.png)
+
+### Semantic Segmentation
+
+Below figure compares the performance of ESPNet and ESPNetv2 on two different datasets. Note that ESPNets are one of the first efficient networks that delivers competitive performance to existing networks on the PASCAL VOC dataset.
+
+![ESPNets performance](/images/perf_espnet.png)
 
 ## Citation
 If you find this repository helpful, please feel free to cite our work:
