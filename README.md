@@ -10,6 +10,12 @@ This repo contains source code of our work on designing efficient networks for d
  * Object detection
     * PASCAL VOC
     * MS-COCO 
+    
+This repo supports following networks:
+ * ESPNetv2 (Classification, Segmentation, Detection)
+ * DiCENet (Classification, Segmentation, Detection)
+ * ShuffleNetv2 (Classification)
+ 
 
 ## Relevant papers
  * [ESPNet (ECCV'18)](https://arxiv.org/abs/1803.06815)
