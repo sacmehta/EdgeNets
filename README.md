@@ -21,7 +21,7 @@ This repo supports following networks:
 ## Relevant papers
  * [ESPNet (ECCV'18)](https://arxiv.org/abs/1803.06815)
  * [ESPNetv2 (CVPR'19)](https://arxiv.org/abs/1811.11431)
- * [DiCENet (arxiv)](Coming soon)
+ * [DiCENet (arxiv)](https://arxiv.org/pdf/1906.03516.pdf)
  
 ## Performance comparison
 
