@@ -3,7 +3,7 @@
 ## Training and Testing on the ImageNet
 
 This repository supports training and testing of following models:
- * [DiCENet]()
+ * [DiCENet](https://arxiv.org/pdf/1906.03516.pdf)
  * [ESPNetv2 (CVPR'19)](https://arxiv.org/abs/1811.11431)
  * [ShuffleNetv2 (ECCV'18)](https://arxiv.org/abs/1807.11164)
  
