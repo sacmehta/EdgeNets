@@ -39,12 +39,11 @@ Below figure compares the performance of ESPNet and ESPNetv2 on two different da
 ## Citation
 If you find this repository helpful, please feel free to cite our work:
 ```
-@inproceedings{mehta2018espnet,
-  title={Espnet: Efficient spatial pyramid of dilated convolutions for semantic segmentation},
-  author={Mehta, Sachin and Rastegari, Mohammad and Caspi, Anat and Shapiro, Linda and Hajishirzi, Hannaneh},
-  booktitle={Proceedings of the European Conference on Computer Vision (ECCV)},
-  pages={552--568},
-  year={2018}
+@misc{mehta2019dicenet,
+Author = {Sachin Mehta and Hannaneh Hajishirzi and Mohammad Rastegari},
+Title = {DiCENet: Dimension-wise Convolutions for Efficient Networks},
+Year = {2019},
+Eprint = {arXiv:1906.03516},
 }
 
 @inproceedings{mehta2018espnetv2,
@@ -54,6 +53,13 @@ If you find this repository helpful, please feel free to cite our work:
   year={2019}
 }
 
+@inproceedings{mehta2018espnet,
+  title={Espnet: Efficient spatial pyramid of dilated convolutions for semantic segmentation},
+  author={Mehta, Sachin and Rastegari, Mohammad and Caspi, Anat and Shapiro, Linda and Hajishirzi, Hannaneh},
+  booktitle={Proceedings of the European Conference on Computer Vision (ECCV)},
+  pages={552--568},
+  year={2018}
+}
 ```
 
 ## Key highlights
