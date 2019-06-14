@@ -1,6 +1,6 @@
 # Efficient networks for Computer Vision
 
-> This repo contains source code of our work on designing efficient networks for different computer vision tasks: 
+This repo contains source code of our work on designing efficient networks for different computer vision tasks: 
  * Image classification
     * Single-label classification on the ImageNet dataset
     * Multi-label classification on the MS-COCO dataset
