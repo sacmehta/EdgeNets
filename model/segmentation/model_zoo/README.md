@@ -72,9 +72,9 @@
 -->
 | s | Image Size | FLOPs (in million) | Params (in million) | mIOU (class-wise) | Link |
 |---|---|---|---|---|---|
-| 0.5 | 1024x512 | 597.56 | 0.08 |  (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_0.5_city_512x256.pth)|
-| 1.0 | 1024x512 |  |  |  (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_1.0_city_512x256.pth)|
-| 1.5 | 1024x512 |  |  | (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_1.5_city_512x256.pth)|
-| 2.0 | 1024x512 | 2699.05 | 0.79 | 66.4 (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_2.0_city_512x256.pth)|
+| 0.5 | 1024x512 |  597.56 | 0.08 |  53.9 (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_0.5_city_1024x512.pth)|
+| 1.0 | 1024x512 | 1086.59 | 0.23 |  60.1 (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_1.0_city_1024x512.pth)|
+| 1.5 | 1024x512 | 1714.57 | 0.47 | 63.8 (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_1.5_city_1024x512.pth)|
+| 2.0 | 1024x512 | 2699.05 | 0.79 | 66.4 (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_2.0_city_1024x512.pth)|
 | 2.0 | 1024x512 | 2699.05 | 0.79 | 66.2 (test) | [Leaderboard](https://www.cityscapes-dataset.com/benchmarks/) |
 
