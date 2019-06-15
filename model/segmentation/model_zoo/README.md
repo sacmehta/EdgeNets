@@ -56,6 +56,7 @@
 | s | Image Size | FLOPs (in million) | Params (in million) | mIOU (class-wise) | Link |
 |---|---|---|---|---|---|
 | 2. 0 | 256x256 | 337.58 | 0.79 |  63.36 (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_2.0_pascal_256x256.pth) |
+| 2. 0 | 256x256 | 337.58 | 0.79 |  63.36 (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_2.0_pascal_256x256.pth) |
 | 2. 0 | 384x384 | 759.52 | 0.79 | 67.01 (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_2.0_pascal_384x384.pth) |
 | 2. 0 | 384x384 | 759.52 | 0.79 | 67.95 (test) | [Leaderboard](http://host.robots.ox.ac.uk:8080/anonymous/DAMVRR.html) |
 
@@ -63,7 +64,17 @@
 
 | s | Image Size | FLOPs (in million) | Params (in million) | mIOU (class-wise) | Link |
 |---|---|---|---|---|---|
+| 0.5 | 512x256 | 149.40 | 0.08 | 47.3 (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_0.5_city_512x256.pth) |
+| 1.0 | 512x256 | 271.66 | 0.23 | 52.2 (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_1.0_city_512x256.pth) |
+| 1.5 | 512x256 | 428.66 | 0.47 |  54.6 (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_1.5_city_512x256.pth) |
+<!--
 | 2. 0 | 512x256 | 674.78 | 0.79 | 50.4 (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_2.0_city_512x256.pth) |
-| 2. 0 | 1024x512 | 2699.05 | 0.79 | 66.4 (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_2.0_city_512x256.pth) |
-| 2. 0 | 1024x512 | 2699.05 | 0.79 | 66.2 (test) | [Leaderboard](https://www.cityscapes-dataset.com/benchmarks/) |
+-->
+| s | Image Size | FLOPs (in million) | Params (in million) | mIOU (class-wise) | Link |
+|---|---|---|---|---|---|
+| 0.5 | 1024x512 | 597.56 | 0.08 |  (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_0.5_city_512x256.pth)|
+| 1.0 | 1024x512 |  |  |  (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_1.0_city_512x256.pth)|
+| 1.5 | 1024x512 |  |  | (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_1.5_city_512x256.pth)|
+| 2.0 | 1024x512 | 2699.05 | 0.79 | 66.4 (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_2.0_city_512x256.pth)|
+| 2.0 | 1024x512 | 2699.05 | 0.79 | 66.2 (test) | [Leaderboard](https://www.cityscapes-dataset.com/benchmarks/) |
 
