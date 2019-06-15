@@ -55,34 +55,34 @@
 
 | s | Image Size | FLOPs (in million) | Params (in million) | mIOU (class-wise) | Link |
 |---|---|---|---|---|---|
-| 0.5 | 256x256 |  74.88 | 0.08 |  39.82 (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_0.5_pascal_256x256.pth) |
-| 1.0 | 256x256 | 136.0 | 0.23 |  54.14 (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_1.0_pascal_256x256.pth) |
-| 1.5 | 256x256 | 214.51 | 0.47 |  59.39 (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_1.5_pascal_256x256.pth) |
-| 2. 0 | 256x256 | 337.58 | 0.79 |  63.36 (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_2.0_pascal_256x256.pth) |
+| 0.5 | 256x256 |  74.88 | 0.08 |  39.82 | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_0.5_pascal_256x256.pth) |
+| 1.0 | 256x256 | 136.0 | 0.23 |  54.14  | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_1.0_pascal_256x256.pth) |
+| 1.5 | 256x256 | 214.51 | 0.47 |  59.39  | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_1.5_pascal_256x256.pth) |
+| 2. 0 | 256x256 | 337.58 | 0.79 |  63.36  | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_2.0_pascal_256x256.pth) |
 
 | s | Image Size | FLOPs (in million) | Params (in million) | mIOU (class-wise) | Link |
 |---|---|---|---|---|---|
-| 0.5 | 384x384 |  168.46 | 0.08 | 47.18 (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_0.5_pascal_384x384.pth) |
-| 1.0 | 384x384 | 306.00 | 0.23 | 60.22 (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_1.0_pascal_384x384.pth) |
-| 1.5 | 384x384 | 482.63 | 0.47 | 63.67 (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_1.5_pascal_384x384.pth) |
-| 2. 0 | 384x384 | 759.52 | 0.79 | 67.01 (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_2.0_pascal_384x384.pth)|
+| 0.5 | 384x384 |  168.46 | 0.08 | 47.18 | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_0.5_pascal_384x384.pth) |
+| 1.0 | 384x384 | 306.00 | 0.23 | 60.22  | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_1.0_pascal_384x384.pth) |
+| 1.5 | 384x384 | 482.63 | 0.47 | 63.67 | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_1.5_pascal_384x384.pth) |
+| 2. 0 | 384x384 | 759.52 | 0.79 | 67.01  | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_2.0_pascal_384x384.pth)|
 | 2. 0 | 384x384 | 759.52 | 0.79 | 67.95 (test) | [Leaderboard](http://host.robots.ox.ac.uk:8080/anonymous/DAMVRR.html) |
 
 ### Cityscapes
 
 | s | Image Size | FLOPs (in million) | Params (in million) | mIOU (class-wise) | Link |
 |---|---|---|---|---|---|
-| 0.5 | 512x256 | 149.40 | 0.08 | 47.3 (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_0.5_city_512x256.pth) |
-| 1.0 | 512x256 | 271.66 | 0.23 | 52.2 (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_1.0_city_512x256.pth) |
-| 1.5 | 512x256 | 428.66 | 0.47 |  54.6 (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_1.5_city_512x256.pth) |
+| 0.5 | 512x256 | 149.40 | 0.08 | 47.3 | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_0.5_city_512x256.pth) |
+| 1.0 | 512x256 | 271.66 | 0.23 | 52.2  | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_1.0_city_512x256.pth) |
+| 1.5 | 512x256 | 428.66 | 0.47 |  54.6  | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_1.5_city_512x256.pth) |
 <!--
 | 2. 0 | 512x256 | 674.78 | 0.79 | 50.4 (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_2.0_city_512x256.pth) |
 -->
 | s | Image Size | FLOPs (in million) | Params (in million) | mIOU (class-wise) | Link |
 |---|---|---|---|---|---|
-| 0.5 | 1024x512 |  597.56 | 0.08 |  53.9 (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_0.5_city_1024x512.pth)|
-| 1.0 | 1024x512 | 1086.59 | 0.23 |  60.1 (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_1.0_city_1024x512.pth)|
-| 1.5 | 1024x512 | 1714.57 | 0.47 | 63.8 (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_1.5_city_1024x512.pth)|
-| 2.0 | 1024x512 | 2699.05 | 0.79 | 66.4 (val) | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_2.0_city_1024x512.pth)|
+| 0.5 | 1024x512 |  597.56 | 0.08 |  53.9  | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_0.5_city_1024x512.pth)|
+| 1.0 | 1024x512 | 1086.59 | 0.23 |  60.1 | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_1.0_city_1024x512.pth)|
+| 1.5 | 1024x512 | 1714.57 | 0.47 | 63.8  | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_1.5_city_1024x512.pth)|
+| 2.0 | 1024x512 | 2699.05 | 0.79 | 66.4  | [here](/model/segmentation/model_zoo/espnetv2/espnetv2_s_2.0_city_1024x512.pth)|
 | 2.0 | 1024x512 | 2699.05 | 0.79 | 66.2 (test) | [Leaderboard](https://www.cityscapes-dataset.com/benchmarks/) |
 
