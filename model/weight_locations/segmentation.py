@@ -8,7 +8,7 @@ model_weight_map = {}
 
 
 #ESPNetv2
-espnetv2_scales = [2.0]
+espnetv2_scales = [0.5, 1.0, 1.5, 2.0]
 for scale in espnetv2_scales:
     model_weight_map['espnetv2_{}'.format(scale)] = {
         'pascal_256x256':
