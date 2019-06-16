@@ -13,6 +13,14 @@ This repo contains source code of our work on designing efficient networks for d
     
 Table of content
 - [Key highlihgts](#key-highlights)
+- [Supported networks](#supported-networks)
+- [Relevant papers](#relevant-papers)
+- [Blogs](#blogs)
+- [Performance comparison](#performance-comparison)
+- [Training receipe](#training-receipe)
+- [Citation](#citation)
+- [License](#license)
+- [Acknowledgements](#acknowledgements)
     
 ## Key highlights
  * Object classification on the ImageNet and MS-COCO (multi-label)
