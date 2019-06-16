@@ -11,7 +11,7 @@ This repo contains source code of our work on designing efficient networks for d
     * PASCAL VOC
     * MS-COCO 
     
-## Table of content
+Table of content
 - [Key highlihgts](key-highlights)
     
 ## Key highlights
