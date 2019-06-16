@@ -6,15 +6,15 @@ This repo contains source code of our work on designing efficient networks for d
  * Object detection
     
 **Table of content**
- 1 [Key highlihgts](#key-highlights)
- 2 [Supported networks](#supported-networks)
- 3 [Relevant papers](#relevant-papers)
- 4 [Blogs](#blogs)
- 5 [Performance comparison](#performance-comparison)
- 6 [Training receipe](#training-receipe)
- 7 [Citation](#citation)
- 8 [License](#license)
- 9 [Acknowledgements](#acknowledgements)
+ 1. [Key highlihgts](#key-highlights)
+ 2. [Supported networks](#supported-networks)
+ 3. [Relevant papers](#relevant-papers)
+ 4. [Blogs](#blogs)
+ 5. [Performance comparison](#performance-comparison)
+ 6. [Training receipe](#training-receipe)
+ 7. [Citation](#citation)
+ 8. [License](#license)
+ 9. [Acknowledgements](#acknowledgements)
     
 ## Key highlights
  * Object classification on the ImageNet and MS-COCO (multi-label)
