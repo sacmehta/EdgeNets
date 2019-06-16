@@ -49,7 +49,7 @@ Below figure compares the performance of ESPNet and ESPNetv2 on two different da
 
 ![ESPNets performance](/images/perf_espnet.png)
 
-## Training and Testing Details
+## Training Receipe
 
 ### Image Classification
 Details about training and testing are provided [here](README_Classification.md).
