@@ -11,6 +11,9 @@ This repo contains source code of our work on designing efficient networks for d
     * PASCAL VOC
     * MS-COCO 
     
+## Table of content
+- [Key highlihgts](key-highlights)
+    
 ## Key highlights
  * Object classification on the ImageNet and MS-COCO (multi-label)
  * Semantic Segmentation on the PASCAL VOC and the CityScapes
