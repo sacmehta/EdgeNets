@@ -1,11 +1,11 @@
 # Efficient networks for Computer Vision
 
 This repo contains source code of our work on designing efficient networks for different computer vision tasks: 
- * Image classification (Single/multi-label)
- * Semantic segmentation
- * Object detection
+ 1. Image classification (Single/multi-label)
+ 2. Semantic segmentation
+ 3. Object detection
     
-**Table of content**
+**Table of contents**
  1. [Key highlihgts](#key-highlights)
  2. [Supported networks](#supported-networks)
  3. [Relevant papers](#relevant-papers)
