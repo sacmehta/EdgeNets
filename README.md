@@ -12,7 +12,7 @@ This repo contains source code of our work on designing efficient networks for d
     * MS-COCO 
     
 Table of content
-- [Key highlihgts](key-highlights)
+- [Key highlihgts](#key-highlights)
     
 ## Key highlights
  * Object classification on the ImageNet and MS-COCO (multi-label)
