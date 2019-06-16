@@ -1,26 +1,20 @@
 # Efficient networks for Computer Vision
 
 This repo contains source code of our work on designing efficient networks for different computer vision tasks: 
- * Image classification
-    * Single-label classification on the ImageNet dataset
-    * Multi-label classification on the MS-COCO dataset
+ * Image classification (Single/multi-label)
  * Semantic segmentation
-    * PASCAL VOC
-    * Cityscapes
  * Object detection
-    * PASCAL VOC
-    * MS-COCO 
     
-<span style="color:blue">**Table of content**</span>
-- [Key highlihgts](#key-highlights)
-- [Supported networks](#supported-networks)
-- [Relevant papers](#relevant-papers)
-- [Blogs](#blogs)
-- [Performance comparison](#performance-comparison)
-- [Training receipe](#training-receipe)
-- [Citation](#citation)
-- [License](#license)
-- [Acknowledgements](#acknowledgements)
+**Table of content**
+1 [Key highlihgts](#key-highlights)
+2 [Supported networks](#supported-networks)
+3 [Relevant papers](#relevant-papers)
+4 [Blogs](#blogs)
+5 [Performance comparison](#performance-comparison)
+6 [Training receipe](#training-receipe)
+7 [Citation](#citation)
+8 [License](#license)
+9 [Acknowledgements](#acknowledgements)
     
 ## Key highlights
  * Object classification on the ImageNet and MS-COCO (multi-label)
