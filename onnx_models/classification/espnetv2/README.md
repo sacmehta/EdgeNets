@@ -1,4 +1,4 @@
-This folder contains ONNX compatible models.
+This folder contains ONNX compatible models for ESPNetv2.
 
 The file name follows this format:
 ```
