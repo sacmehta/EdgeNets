@@ -9,7 +9,7 @@ import torch
 import cv2
 import numpy as np
 from transforms.classification.data_transforms import MEAN as MEAN_FLOAT
-from transforms.classification.data_transforms import MEAN as STD_FLOAT
+from transforms.classification.data_transforms import STD as STD_FLOAT
 from numpy import random
 import math
 
