@@ -84,7 +84,7 @@ def main(args):
     # -----------------------------------------------------------------------------
     # Evaluate
     # -----------------------------------------------------------------------------
-    predictor = BoxPredictor(cfg=cfg)
+    predictor = BoxPredictor(cfg=cfg, device=device)
     predictions = eval(model=model, dataset=dataset_class, predictor=predictor)
 
     result_info = evaluate(dataset=dataset_class, predictions=predictions, output_dir=None,
