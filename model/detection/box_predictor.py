@@ -10,9 +10,9 @@ from data_loader.detection.augmentation import TestTransform
 
 class BoxPredictor(object):
 
-    def __init__(self, cfg):
+    def __init__(self, cfg, device='cpu'):
         super(BoxPredictor, self).__init__()
-        device = 'cuda' if torch.cuda.device_count() > 1 else 'cpu'
+        #device = 'cuda' if torch.cuda.device_count() > 1 else 'cpu'
         self.priors = PriorBox(cfg)().to(device)
         self.center_var = cfg.center_variance
         self.size_var = cfg.size_variance
