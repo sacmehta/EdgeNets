@@ -19,7 +19,7 @@ def evaluate(dataset, dataset_name, predictions, output_dir):
     args = dict(
         dataset=dataset, predictions=predictions, output_dir=output_dir
     )
-    if dataset_name == 'voc':
+    if dataset_name in ['voc', 'pascal']:
         evaluation_result = voc_evaluation(**args)
         return evaluation_result
     elif dataset_name == 'coco':
