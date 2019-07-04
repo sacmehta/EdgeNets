@@ -344,7 +344,7 @@ class SwapChannels(object):
 class RandomFlipping(object):
     def __call__(self, image, boxes, classes):
         if random.random() < 0.5:
-            width = image.shape[2]
+            width = image.shape[1]
             image = image[:, ::-1]
             boxes = boxes.copy()
             boxes[:, 0::2] = width - boxes[:, 2::-2]
