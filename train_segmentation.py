@@ -12,7 +12,7 @@ import torch.optim as optim
 from utilities.utils import save_checkpoint, model_parameters, compute_flops
 from utilities.train_eval_seg import train_seg as train
 from utilities.train_eval_seg import val_seg as val
-from tensorboardX import SummaryWriter
+from torch.utils.tensorboard import SummaryWriter
 from loss_fns.segmentation_loss import SegmentationLoss
 import random
 import math
@@ -113,7 +113,10 @@ def main(args):
     print_info_message('Network Parameters: {:.2f} million'.format(num_params))
 
     writer = SummaryWriter(log_dir=args.savedir, comment='Training and Validation logs')
-    #writer.add_graph(model, input_to_model=torch.Tensor(1, 3, crop_size[0], crop_size[1]))
+    try:
+        writer.add_graph(model, input_to_model=torch.Tensor(1, 3, crop_size[0], crop_size[1]))
+    except:
+        print_log_message("Not able to generate the graph. Likely because your model is not supported by ONNX")
 
     start_epoch = 0
     best_miou = 0.0

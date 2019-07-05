@@ -6,7 +6,7 @@ import torch.utils.data.distributed
 from data_loader.classification import imagenet as img_loader
 import random
 import os
-from tensorboardX import SummaryWriter
+from torch.utils.tensorboard import SummaryWriter
 import time
 from utilities.utils import model_parameters, compute_flops
 from utilities.utils import save_checkpoint
@@ -72,7 +72,10 @@ def main(args):
     if not os.path.isdir(args.savedir):
         os.makedirs(args.savedir)
     writer = SummaryWriter(log_dir=args.savedir, comment='Training and Validation logs')
-    writer.add_graph(model, input_to_model=torch.randn(1, 3, args.inpSize, args.inpSize))
+    try:
+        writer.add_graph(model, input_to_model=torch.randn(1, 3, args.inpSize, args.inpSize))
+    except:
+        print_log_message("Not able to generate the graph. Likely because your model is not supported by ONNX")
 
     # network properties
     num_params = model_parameters(model)
