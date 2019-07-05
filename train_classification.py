@@ -248,7 +248,7 @@ if __name__ == '__main__':
     parser.add_argument('--epochs', default=300, type=int, help='number of total epochs to run')
     parser.add_argument('--start-epoch', default=0, type=int, help='manual epoch number (useful on restarts)')
     parser.add_argument('--clr-max', default=61, type=int, help='Max. epochs for CLR in Hybrid scheduler')
-    parser.add_argument('--steps', default=[51, 101, 131, 161, 191, 221, 251, 281], type=list,
+    parser.add_argument('--steps', default=[51, 101, 131, 161, 191, 221, 251, 281], type=int, nargs="+",
                         help='steps at which lr should be decreased. Only used for Cyclic and Fixed LR')
     parser.add_argument('--scheduler', default='clr', choices=classification_schedulers,
                         help='Learning rate scheduler')

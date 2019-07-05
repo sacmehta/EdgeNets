@@ -72,6 +72,14 @@ def main(args):
             print_info_message('Done')
         else:
             print_warning_message('No file for finetuning. Please check.')
+
+    if args.freeze_bn:
+        print_info_message('Freezing batch normalization layers')
+        for m in model.modules():
+            if isinstance(m, torch.nn.BatchNorm2d):
+                m.eval()
+                m.weight.requires_grad = False
+                m.bias.requires_grad = False
     # -----------------------------------------------------------------------------
     # Optimizer and Criterion
     # -----------------------------------------------------------------------------
@@ -204,7 +212,7 @@ if __name__ == '__main__':
     parser.add_argument('--clr-max', default=160, type=int, help='Max CLR epochs (only for hybrid)')
     parser.add_argument('--cycle-len', default=5, type=int, help='Cycle length for CLR')
     # CLR/Multi-step LR related hyper-parameters
-    parser.add_argument('--steps', default=[51, 161, 201], type=list,
+    parser.add_argument('--steps', default=[51, 161, 201], type=int, nargs="+",
                         help='steps at which lr should be decreased. Only used for Cyclic and Fixed LR')
 
     # general training parameters
@@ -215,6 +223,7 @@ if __name__ == '__main__':
     parser.add_argument('--im-size', default=300, type=int, help='Image size for training')
     # finetune the model
     parser.add_argument('--finetune', default='', type=str, help='finetune')
+    parser.add_argument('--freeze-bn', action='store_true', default=False, help='Freeze BN params or not')
 
     args = parser.parse_args()
 
