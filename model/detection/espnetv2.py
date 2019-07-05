@@ -23,14 +23,16 @@ class ESPNetv2SSD(nn.Module):
         # =============================================================
 
         self.basenet = EESPNet(args)
-        # delte the last layer in level 5
-        del self.basenet.level5[4]
         # delete the classification layer
         del self.basenet.classifier
+        # delte the last layer in level 5
+        #del self.basenet.level5[4]
+        #del self.basenet.level5[3]
+
 
         # retrive the basenet configuration
         base_net_config = self.basenet.config
-        config = base_net_config[:4] + [base_net_config[4]]
+        config = base_net_config[:4] + [base_net_config[5]]
 
         # add configuration for SSD version
         config += [512, 256, 128]

@@ -148,7 +148,6 @@ def main(args):
     # Training and validation loop
     # -----------------------------------------------------------------------------
 
-    validate(val_loader, model, criterion, device, epoch=-1)
     extra_info_ckpt = '{}_{}'.format(args.model, args.s)
     for epoch in range(start_epoch, args.epochs):
         curr_lr = lr_scheduler.step(epoch)

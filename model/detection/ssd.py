@@ -186,7 +186,7 @@ if __name__ == "__main__":
     args.model_height = 224
     args.model = 'espnetv2'
     args.weights = ''
-    args.im_size = 512
+    args.im_size = 300
 
     if args.im_size == 512:
         from model.detection.ssd_config import SSD512Configuration as cfg
