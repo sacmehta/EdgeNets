@@ -55,7 +55,7 @@ class SSD300Configuration(object):
 
     # test specific options
     nms_threshold = 0.45
-    conf_threshold = 0.01
+    conf_threshold = 0.01 # change this value during demo
     top_k = 200 # MAX detections per class
     max_per_image = -1
 
@@ -101,7 +101,7 @@ class SSD512Configuration(object):
 
     # test specific options
     nms_threshold = 0.45
-    conf_threshold = 0.01
+    conf_threshold = 0.01 # change this value during demo
     top_k = 200 # MAX detections per class
     max_per_image = -1
 
