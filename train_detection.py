@@ -227,7 +227,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     if not args.weights:
-        print('Loading weights using the weight dictionary')
+        print_info_message('Loading weights using the weight dictionary')
         from model.weight_locations.classification import model_weight_map
         weight_file_key = '{}_{}'.format(args.model, args.s)
         assert weight_file_key in model_weight_map.keys(), '{} does not exist'.format(weight_file_key)

@@ -144,7 +144,7 @@ if __name__ == '__main__':
     # This key is used to load the ImageNet weights while training. So, set to empty to avoid errors
     args.weights = ''
 
-    args.save_dir = 'results_detection_{}_{}/{}/'.format(args.model, args.s, args.dataset)
+    args.save_dir = 'results_detection_{}_{}/{}_{}/'.format(args.model, args.s, args.dataset, args.im_size)
 
     if not os.path.isdir(args.save_dir):
         os.makedirs(args.save_dir)

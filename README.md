@@ -71,6 +71,8 @@ Details about performance of different models are provided [here](model/segmenta
 
 Details about training and testing are provided [here](README_Detection.md).
 
+Details about performance of different models are provided [here](model/detection/model_zoo/README.md).
+
 ## Citation
 If you find this repository helpful, please feel free to cite our work:
 ```
