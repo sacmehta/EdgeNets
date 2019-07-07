@@ -6,7 +6,7 @@ import torch.utils.data.distributed
 from data_loader.classification import imagenet as img_loader
 import random
 import os
-from tensorboardX import SummaryWriter
+from torch.utils.tensorboard import SummaryWriter
 import time
 from utilities.utils import model_parameters, compute_flops
 from utilities.utils import save_checkpoint
@@ -72,7 +72,10 @@ def main(args):
     if not os.path.isdir(args.savedir):
         os.makedirs(args.savedir)
     writer = SummaryWriter(log_dir=args.savedir, comment='Training and Validation logs')
-    writer.add_graph(model, input_to_model=torch.randn(1, 3, args.inpSize, args.inpSize))
+    try:
+        writer.add_graph(model, input_to_model=torch.randn(1, 3, args.inpSize, args.inpSize))
+    except:
+        print_log_message("Not able to generate the graph. Likely because your model is not supported by ONNX")
 
     # network properties
     num_params = model_parameters(model)
@@ -245,7 +248,7 @@ if __name__ == '__main__':
     parser.add_argument('--epochs', default=300, type=int, help='number of total epochs to run')
     parser.add_argument('--start-epoch', default=0, type=int, help='manual epoch number (useful on restarts)')
     parser.add_argument('--clr-max', default=61, type=int, help='Max. epochs for CLR in Hybrid scheduler')
-    parser.add_argument('--steps', default=[51, 101, 131, 161, 191, 221, 251, 281], type=list,
+    parser.add_argument('--steps', default=[51, 101, 131, 161, 191, 221, 251, 281], type=int, nargs="+",
                         help='steps at which lr should be decreased. Only used for Cyclic and Fixed LR')
     parser.add_argument('--scheduler', default='clr', choices=classification_schedulers,
                         help='Learning rate scheduler')

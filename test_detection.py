@@ -87,7 +87,7 @@ def main(args):
     predictor = BoxPredictor(cfg=cfg, device=device)
     predictions = eval(model=model, dataset=dataset_class, predictor=predictor)
 
-    result_info = evaluate(dataset=dataset_class, predictions=predictions, output_dir=None,
+    result_info = evaluate(dataset=dataset_class, predictions=predictions, output_dir=args.save_dir,
                            dataset_name=args.dataset)
 
     # -----------------------------------------------------------------------------
@@ -120,7 +120,6 @@ if __name__ == '__main__':
     parser.add_argument('--model', default='espnetv2', choices=detection_models, type=str,
                         help='initialized model path')
     parser.add_argument('--s', default=2.0, type=float, help='Model scale factor')
-    parser.add_argument('--save', default='results_detection', type=str, help='results path')
     parser.add_argument('--dataset', default='pascal', choices=detection_datasets, help='Name of the dataset')
     parser.add_argument('--data-path', default='', help='Dataset path')
     parser.add_argument('--weights-test', default='', help='model weights')
@@ -144,5 +143,10 @@ if __name__ == '__main__':
 
     # This key is used to load the ImageNet weights while training. So, set to empty to avoid errors
     args.weights = ''
+
+    args.save_dir = 'results_detection_{}_{}/{}_{}/'.format(args.model, args.s, args.dataset, args.im_size)
+
+    if not os.path.isdir(args.save_dir):
+        os.makedirs(args.save_dir)
 
     main(args)

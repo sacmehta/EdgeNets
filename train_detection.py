@@ -10,8 +10,7 @@ from loss_fns.multi_box_loss import MultiBoxLoss
 from utilities.train_eval_detect import train, validate
 from utilities.utils import save_checkpoint, model_parameters, compute_flops
 import math
-from tensorboardX import SummaryWriter
-import time
+from torch.utils.tensorboard import SummaryWriter
 from utilities.print_utils import *
 from model.detection.ssd import ssd
 
@@ -65,6 +64,22 @@ def main(args):
     # Model
     # -----------------------------------------------------------------------------
     model = ssd(args, cfg)
+    if args.finetune:
+        if os.path.isfile(args.finetune):
+            print_info_message('Loading weights for finetuning from {}'.format(args.finetune))
+            weight_dict = torch.load(args.finetune, map_location=torch.device(device='cpu'))
+            model.load_state_dict(weight_dict)
+            print_info_message('Done')
+        else:
+            print_warning_message('No file for finetuning. Please check.')
+
+    if args.freeze_bn:
+        print_info_message('Freezing batch normalization layers')
+        for m in model.modules():
+            if isinstance(m, torch.nn.BatchNorm2d):
+                m.eval()
+                m.weight.requires_grad = False
+                m.bias.requires_grad = False
     # -----------------------------------------------------------------------------
     # Optimizer and Criterion
     # -----------------------------------------------------------------------------
@@ -74,6 +89,10 @@ def main(args):
 
     # writer for logs
     writer = SummaryWriter(log_dir=args.save, comment='Training and Validation logs')
+    try:
+        writer.add_graph(model, input_to_model=torch.Tensor(1, 3, cfg.image_size, cfg.image_size))
+    except:
+        print_log_message("Not able to generate the graph. Likely because your model is not supported by ONNX")
 
     #model stats
     num_params = model_parameters(model)
@@ -129,7 +148,6 @@ def main(args):
     # Training and validation loop
     # -----------------------------------------------------------------------------
 
-    validate(val_loader, model, criterion, device, epoch=-1)
     extra_info_ckpt = '{}_{}'.format(args.model, args.s)
     for epoch in range(start_epoch, args.epochs):
         curr_lr = lr_scheduler.step(epoch)
@@ -193,7 +211,7 @@ if __name__ == '__main__':
     parser.add_argument('--clr-max', default=160, type=int, help='Max CLR epochs (only for hybrid)')
     parser.add_argument('--cycle-len', default=5, type=int, help='Cycle length for CLR')
     # CLR/Multi-step LR related hyper-parameters
-    parser.add_argument('--steps', default=[51, 161, 201], type=list,
+    parser.add_argument('--steps', default=[51, 161, 201], type=int, nargs="+",
                         help='steps at which lr should be decreased. Only used for Cyclic and Fixed LR')
 
     # general training parameters
@@ -202,10 +220,14 @@ if __name__ == '__main__':
     parser.add_argument('--epochs', default=240, type=int, help='Max number of epochs')
     parser.add_argument('--weights', default='', type=str, help='Location of pretrained weights')
     parser.add_argument('--im-size', default=300, type=int, help='Image size for training')
+    # finetune the model
+    parser.add_argument('--finetune', default='', type=str, help='finetune')
+    parser.add_argument('--freeze-bn', action='store_true', default=False, help='Freeze BN params or not')
+
     args = parser.parse_args()
 
     if not args.weights:
-        print('Loading weights using the weight dictionary')
+        print_info_message('Loading weights using the weight dictionary')
         from model.weight_locations.classification import model_weight_map
         weight_file_key = '{}_{}'.format(args.model, args.s)
         assert weight_file_key in model_weight_map.keys(), '{} does not exist'.format(weight_file_key)

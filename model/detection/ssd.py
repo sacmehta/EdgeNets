@@ -7,33 +7,15 @@ import torch
 from torch import nn
 from utilities.print_utils import *
 from nn_layers.cnn_utils import CBR
-from model.detection.espnetv2 import ESPNetv2SSD300, ESPNetv2SSD512
-
-
-class SSDClassificationLayers(nn.Module):
-    def __init__(self, nin, nout):
-        super(SSDClassificationLayers, self).__init__()
-        self.dwsep = nn.Sequential(
-            CBR(nin, nin, kSize=3, groups=nin),
-            nn.Conv2d(nin, nout, kernel_size=1)
-        )
-
-    def forward(self, x):
-        return self.dwsep(x)
+from model.detection.espnetv2 import ESPNetv2SSD
 
 
 class SSDExtraLayers(nn.Module):
-
     def __init__(self, nin, nout, ksize=3):
         super(SSDExtraLayers, self).__init__()
-        reduction = 2
-        mid_planes = nin // reduction
         self.layer = nn.Sequential(
-            CBR(nin, mid_planes, 1, 1),
-            CBR(mid_planes, mid_planes, stride=2, kSize=ksize, groups=mid_planes),
-            CBR(mid_planes, mid_planes, kSize=1),
-            CBR(mid_planes, mid_planes, kSize=ksize, groups=mid_planes),
-            CBR(mid_planes, nout, kSize=1)
+            CBR(nin, nin, stride=2, kSize=ksize, groups=nin),
+            CBR(nin, nout, kSize=1)
         )
 
     def forward(self, x):
@@ -43,7 +25,7 @@ class SSD300(nn.Module):
     def __init__(self, args, cfg):
         super(SSD300, self).__init__()
         if args.model == 'espnetv2':
-            self.base_net = ESPNetv2SSD300(args, extra_layer=SSDExtraLayers)
+            self.base_net = ESPNetv2SSD(args, extra_layer=SSDExtraLayers)
         elif args.model == 'dicenet':
             from model.detection.dicenet import SSDNet300
             self.base_net = SSDNet300(args, extra_layer=SSDExtraLayers)
@@ -58,12 +40,8 @@ class SSD300(nn.Module):
         num_anchors = cfg.box_per_location
 
         for i in range(len(self.in_channels)):
-            if i == len(self.in_channels) - 1:
-                self.loc_layers += [nn.Conv2d(self.in_channels[i], num_anchors[i] * 4, kernel_size=1)]
-                self.cls_layers += [nn.Conv2d(self.in_channels[i], num_anchors[i] * self.num_classes, kernel_size=1)]
-            else:
-                self.loc_layers += [SSDClassificationLayers(self.in_channels[i], num_anchors[i] * 4)]
-                self.cls_layers += [SSDClassificationLayers(self.in_channels[i], num_anchors[i] * self.num_classes)]
+            self.loc_layers += [nn.Conv2d(self.in_channels[i], num_anchors[i] * 4, kernel_size=1)]
+            self.cls_layers += [nn.Conv2d(self.in_channels[i], num_anchors[i] * self.num_classes, kernel_size=1)]
         self.init_params()
 
     def init_params(self):
@@ -102,10 +80,10 @@ class SSD300(nn.Module):
 
 
 class SSD512(nn.Module):
-    def __init__(self, args, cfg, basenet_classes=1000):
+    def __init__(self, args, cfg):
         super(SSD512, self).__init__()
         if args.model == 'espnetv2':
-            self.base_net = ESPNetv2SSD512(args, extra_layer=SSDExtraLayers)
+            self.base_net = ESPNetv2SSD(args, extra_layer=SSDExtraLayers)
         elif args.model == 'dicenet':
             from model.detection.dicenet import SSDNet512
             self.base_net = SSDNet512(args, extra_layer=SSDExtraLayers)
@@ -114,18 +92,15 @@ class SSD512(nn.Module):
 
         self.num_classes = cfg.NUM_CLASSES
 
-        self.in_channels = self.base_net.config[-7:]
+        self.in_channels = self.base_net.config[-6:]
         self.loc_layers = nn.ModuleList()
         self.cls_layers = nn.ModuleList()
         num_anchors = cfg.box_per_location
 
         for i in range(len(self.in_channels)):
-            if i == len(self.in_channels) - 1:
-                self.loc_layers += [nn.Conv2d(self.in_channels[i], num_anchors[i] * 4, kernel_size=1)]
-                self.cls_layers += [nn.Conv2d(self.in_channels[i], num_anchors[i] * self.num_classes, kernel_size=1)]
-            else:
-                self.loc_layers += [SSDClassificationLayers(self.in_channels[i], num_anchors[i] * 4)]
-                self.cls_layers += [SSDClassificationLayers(self.in_channels[i], num_anchors[i] * self.num_classes)]
+            self.loc_layers += [nn.Conv2d(self.in_channels[i], num_anchors[i] * 4, kernel_size=1)]
+            self.cls_layers += [nn.Conv2d(self.in_channels[i], num_anchors[i] * self.num_classes, kernel_size=1)]
+
         self.init_params()
 
     def init_params(self):
@@ -163,14 +138,15 @@ class SSD512(nn.Module):
         return confidences, locations
 
 
-def ssd(args, cfg, basenet_classes=1000):
-    weights = args.weights
-    if args.im_size == 512:
-        model = SSD512(args, cfg, basenet_classes=basenet_classes)
-    elif args.im_size == 300:
-        model = SSD300(args, cfg, basenet_classes=basenet_classes)
+def ssd(config, cfg, *args, **kwargs):
+    weights = config.weights
+
+    if config.im_size == 512:
+        model = SSD512(config, cfg)
+    elif config.im_size == 300:
+        model = SSD300(config, cfg)
     else:
-        print_error_message('{} image size not supported'.format(args.im_size))
+        print_error_message('{} image size not supported'.format(config.im_size))
     if weights:
         import os
         if not os.path.isfile(weights):
@@ -198,33 +174,31 @@ def ssd(args, cfg, basenet_classes=1000):
 
 
 if __name__ == "__main__":
-    from model.weight_locations.classification import model_weight_map
+    from utilities.utils import compute_flops, model_parameters
+    import torch
     import argparse
 
     parser = argparse.ArgumentParser(description='Testing')
     args = parser.parse_args()
-    args.s = 1.0
+    args.s = 2.0
     args.channels = 3
     args.model_width = 224
     args.model_height = 224
-    args.model = 'dicenet'
-    args.weights = '../../' + model_weight_map['{}_{}'.format(args.model, args.s)]
+    args.model = 'espnetv2'
+    args.weights = ''
     args.im_size = 300
 
     if args.im_size == 512:
         from model.detection.ssd_config import SSD512Configuration as cfg
-        cfg.NUM_CLASSES = 21
+        cfg.NUM_CLASSES = 81
     elif args.im_size == 300:
         from model.detection.ssd_config import SSD300Configuration as cfg
-        cfg.NUM_CLASSES = 21
+        cfg.NUM_CLASSES = 81
     else:
         print_error_message('not supported')
     inputs = torch.randn(1, 3, args.im_size, args.im_size)
     net = ssd(args, cfg)
     loc_preds, cls_preds = net(inputs)
-
-    from utilities.utils import compute_flops, model_parameters
-    import torch
 
     print_info_message(compute_flops(net, input=inputs))
     print_info_message(model_parameters(net))

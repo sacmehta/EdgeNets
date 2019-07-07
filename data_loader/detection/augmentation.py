@@ -1,7 +1,7 @@
 # from https://github.com/amdegroot/ssd.pytorch
 
 from transforms.detection.data_transforms import ConvertFromInts, PhotometricDistort, Expand, RandomSampleCrop, \
-    RandomFlipping, ToPercentCoords, Resize, SubtractMeans, ToTensor, Compose
+    RandomFlipping, ToPercentCoords, Resize, Normalize, ToTensor, Compose
 
 
 class TrainTransform:
@@ -22,7 +22,7 @@ class TrainTransform:
             RandomFlipping(),
             ToPercentCoords(),
             Resize(self.size),
-            SubtractMeans(),
+            Normalize(),
             ToTensor(),
         ])
 
@@ -46,7 +46,7 @@ class ValTransform:
         self.transform = Compose([
             ToPercentCoords(),
             Resize(size),
-            SubtractMeans(),
+            Normalize(),
             ToTensor(),
         ])
 
@@ -62,7 +62,7 @@ class TestTransform:
     def __init__(self, size):
         self.transform = Compose([
             Resize(size),
-            SubtractMeans(),
+            Normalize(),
             ToTensor()
         ])
 

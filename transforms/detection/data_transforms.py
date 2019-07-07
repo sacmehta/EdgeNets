@@ -49,7 +49,7 @@ class ConvertFromInts(object):
         return image.astype(np.float32), boxes, labels
 
 
-class SubtractMeans(object):
+class Normalize(object):
     def __call__(self, image, boxes=None, labels=None):
         image = image.astype(np.float32)
         image -= MEAN
