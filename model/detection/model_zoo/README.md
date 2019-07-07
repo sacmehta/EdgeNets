@@ -7,8 +7,8 @@
 
 | s | Data | Image Size | FLOPs (in billion) | Params (in million) | mAP | Link |
 |---|---|---|---|---|---| --- |
-| 2.0 | COCO | 300x300 | 1.1 | 5.81 | 20.80 | [here](/model/detection/model_zoo/espnetv2/espnetv2_s_2.0_pascal_300x300.pth) |
-| 2.0 | COCO | 512x512 |  |  |  | [here](/model/detection/model_zoo/espnetv2/espnetv2_s_2.0_pascal_512x512.pth) |
+| 2.0 | COCO | 300x300 | 1.1 | 5.81 | 20.80 | [here](/model/detection/model_zoo/espnetv2/espnetv2_s_2.0_coco_300x300.pth) |
+| 2.0 | COCO | 512x512 |  |  |  | [here]() |
 
 ### PASCAL VOC 2007
 Below table compares the results on the PASCAL VOC 2007 dataset. It is important to NOTE that we do not use COCO data for below models.
