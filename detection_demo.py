@@ -31,19 +31,19 @@ def main(args):
         from data_loader.detection.voc import VOC_CLASS_LIST
         num_classes = len(VOC_CLASS_LIST)
         object_names = VOC_CLASS_LIST
-
-        cfg.conf_threshold = 0.4
     elif args.dataset == 'coco':
         from data_loader.detection.coco import COCO_CLASS_LIST
         num_classes = len(COCO_CLASS_LIST)
         object_names = COCO_CLASS_LIST
 
-        cfg.conf_threshold = 0.3
+
     else:
         print_error_message('{} dataset not supported.'.format(args.dataset))
         exit(-1)
 
     cfg.NUM_CLASSES = num_classes
+    # discard the boxes that have prediction score less than this value
+    cfg.conf_threshold = 0.4
 
     # -----------------------------------------------------------------------------
     # Model
@@ -65,8 +65,8 @@ def main(args):
             import torch.backends.cudnn as cudnn
             cudnn.benchmark = True
             cudnn.deterministic = True
-    predictor = BoxPredictor(cfg=cfg, device=device)
 
+    predictor = BoxPredictor(cfg=cfg, device=device)
 
     if args.live:
         main_live(predictor=predictor, model=model, object_names=object_names)
@@ -76,44 +76,45 @@ def main(args):
         main_images(predictor=predictor, model=model, object_names=object_names,
                     in_dir=args.im_dir, out_dir=args.save_dir)
 
+
 def main_images(predictor, model, object_names, in_dir, out_dir):
     png_file_names = glob.glob(in_dir + os.sep + '*.png')
     jpg_file_names = glob.glob(in_dir + os.sep + '*.jpg')
     file_names = png_file_names + jpg_file_names
-    for img_name in file_names:
-        image = cv2.imread(img_name)
 
-        start_time = time.time()
+    # model in eval mode
+    model.eval()
+    with torch.no_grad():
+        for img_name in file_names:
+            image = cv2.imread(img_name)
 
-        output = predictor.predict(model, image)
-        prediction_time = (time.time() - start_time) * 1000  # convert to millis
+            start_time = time.time()
 
-        start_time = time.time()
-        boxes, labels, scores = [o.to("cpu").numpy() for o in output]
+            output = predictor.predict(model, image)
+            prediction_time = (time.time() - start_time) * 1000  # convert to millis
 
-        for label, score, coords in zip(labels, scores, boxes):
-            if label == 0:
-                continue
+            start_time = time.time()
+            boxes, labels, scores = [o.to("cpu").numpy() for o in output]
+            for label, score, coords in zip(labels, scores, boxes):
+                r, g, b = COLOR_MAP[label]
+                c1 = (int(coords[0]), int(coords[1]))
+                c2 = (int(coords[2]), int(coords[3]))
+                cv2.rectangle(image, c1, c2, (r, g, b), 2)
+                label_text = '{label}: {score:.3f}'.format(label=object_names[label], score=score)
+                t_size = cv2.getTextSize(label_text, cv2.FONT_HERSHEY_PLAIN, 1, 1)[0]
+                c2 = c1[0] + t_size[0] + 3, c1[1] + t_size[1] + 4
+                cv2.rectangle(image, c1, c2, (r, g, b), -1)
+                cv2.putText(image, label_text, (c1[0], c1[1] + t_size[1] + 4), cv2.FONT_HERSHEY_PLAIN, 1, [255, 255, 255],
+                            1)
 
-            r, g, b = COLOR_MAP[label]
-            c1 = (int(coords[0]), int(coords[1]))
-            c2 = (int(coords[2]), int(coords[3]))
-            cv2.rectangle(image, c1, c2, (r, g, b), 2)
-            label_text = '{label}: {score:.3f}'.format(label=object_names[label], score=score)
-            t_size = cv2.getTextSize(label_text, cv2.FONT_HERSHEY_PLAIN, 1, 1)[0]
-            c2 = c1[0] + t_size[0] + 3, c1[1] + t_size[1] + 4
-            cv2.rectangle(image, c1, c2, (r, g, b), -1)
-            cv2.putText(image, label_text, (c1[0], c1[1] + t_size[1] + 4), cv2.FONT_HERSHEY_PLAIN, 1, [255, 255, 255],
-                        1)
+            annot_time = (time.time() - start_time) * 1000  # convert to millis
+            print_log_message(
+                'Prediction time: {:.2f} ms, Annotation time: {:.2f} ms, Total time: {:.2f} ms'.format(prediction_time,
+                                                                                                       annot_time,
+                                                                                                       prediction_time + annot_time))
 
-        annot_time = (time.time() - start_time) * 1000  # convert to millis
-        print_log_message(
-            'Prediction time: {:.2f} ms, Annotation time: {:.2f} ms, Total time: {:.2f} ms'.format(prediction_time,
-                                                                                                   annot_time,
-                                                                                                   prediction_time + annot_time))
-
-        new_file_name = '{}/{}'.format(out_dir, img_name.split('/')[-1])
-        cv2.imwrite(new_file_name, image)
+            new_file_name = '{}/{}'.format(out_dir, img_name.split('/')[-1])
+            cv2.imwrite(new_file_name, image)
 
 
 def main_live(predictor, model, object_names):
@@ -122,43 +123,47 @@ def main_live(predictor, model, object_names):
     capture_device.set(3, 1920)
     capture_device.set(4, 1080)
 
-    while True:
-        ret, orig_image = capture_device.read()
-        if orig_image is None:
-            continue
-        image = cv2.cvtColor(orig_image, cv2.COLOR_BGR2RGB)
+    # model in eval mode
+    model.eval()
+    with torch.no_grad():
+        while True:
+            ret, image = capture_device.read()
+            if image is None:
+                continue
 
-        start_time = time.time()
+            start_time = time.time()
 
-        output = predictor.predict(model, image)
-        prediction_time = (time.time() - start_time) * 1000
+            output = predictor.predict(model, image)
+            # box prediction time
+            prediction_time = (time.time() - start_time) * 1000
 
-        start_time = time.time()
-        boxes, labels, scores = [o.to("cpu").numpy() for o in output]
+            start_time = time.time()
+            boxes, labels, scores = [o.to("cpu").numpy() for o in output]
 
-        for label, score, coords in zip(labels, scores, boxes):
-            r, g, b = COLOR_MAP[label]
-            c1 = (int(coords[0]), int(coords[1]))
-            c2 = (int(coords[2]), int(coords[3]))
-            cv2.rectangle(image, c1, c2, (r, g, b), 2)
-            label_text = '{label}: {score:.3f}'.format(label=object_names[label], score=score)
-            t_size = cv2.getTextSize(label_text, cv2.FONT_HERSHEY_PLAIN, 1, 1)[0]
-            c2 = c1[0] + t_size[0] + 3, c1[1] + t_size[1] + 4
-            cv2.rectangle(image, c1, c2, (r, g, b), -1)
-            cv2.putText(image, label_text, (c1[0], c1[1] + t_size[1] + 4), cv2.FONT_HERSHEY_PLAIN, 1, [255, 255, 255], 1)
+            for label, score, coords in zip(labels, scores, boxes):
+                r, g, b = COLOR_MAP[label]
+                c1 = (int(coords[0]), int(coords[1]))
+                c2 = (int(coords[2]), int(coords[3]))
+                cv2.rectangle(image, c1, c2, (r, g, b), 2)
+                label_text = '{label}: {score:.3f}'.format(label=object_names[label], score=score)
+                t_size = cv2.getTextSize(label_text, cv2.FONT_HERSHEY_PLAIN, 1, 1)[0]
+                c2 = c1[0] + t_size[0] + 3, c1[1] + t_size[1] + 4
+                cv2.rectangle(image, c1, c2, (r, g, b), -1)
+                cv2.putText(image, label_text, (c1[0], c1[1] + t_size[1] + 4), cv2.FONT_HERSHEY_PLAIN, 1, [255, 255, 255], 1)
 
-        annot_time = (time.time() - start_time) * 1000  # convert to millis
-        print_log_message(
-            'Prediction time: {:.2f} ms, Annotation time: {:.2f} ms, Total time: {:.2f} ms'.format(prediction_time,
-                                                                                                   annot_time,
-                                                                                                   prediction_time + annot_time))
+            # box annotation time
+            annot_time = (time.time() - start_time) * 1000  # convert to millis
+            print_log_message(
+                'Prediction time: {:.2f} ms, Annotation time: {:.2f} ms, Total time: {:.2f} ms'.format(prediction_time,
+                                                                                                       annot_time,
+                                                                                                       prediction_time + annot_time))
 
-        cv2.imshow('Detection Results', orig_image)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
+            cv2.imshow('EdgeNets', image)
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
 
-    capture_device.release()
-    cv2.destroyAllWindows()
+        capture_device.release()
+        cv2.destroyAllWindows()
 
 if __name__ == '__main__':
     from commons.general_details import detection_datasets

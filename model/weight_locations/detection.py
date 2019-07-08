@@ -17,5 +17,9 @@ for scale in espnetv2_scales:
         'pascal_512x512':
             {
                 'weights': 'model/detection/model_zoo/espnetv2/espnetv2_s_{}_pascal_512x512.pth'.format(scale)
+            },
+        'coco_300x300':
+            {
+                'weights': 'model/detection/model_zoo/espnetv2/espnetv2_s_{}_coco_300x300.pth'.format(scale)
             }
     }
