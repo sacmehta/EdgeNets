@@ -19,6 +19,9 @@ for cmap in VOCColormap().get_color_map():
     r, g, b = cmap
     COLOR_MAP.append((int(r), int(g), int(b)))
 
+FONT_SIZE = cv2.FONT_HERSHEY_PLAIN
+LABEL_COLOR = [255, 255, 255]
+
 
 def main(args):
     if args.im_size in [300, 512]:
@@ -101,11 +104,10 @@ def main_images(predictor, model, object_names, in_dir, out_dir):
                 c2 = (int(coords[2]), int(coords[3]))
                 cv2.rectangle(image, c1, c2, (r, g, b), 2)
                 label_text = '{label}: {score:.3f}'.format(label=object_names[label], score=score)
-                t_size = cv2.getTextSize(label_text, cv2.FONT_HERSHEY_PLAIN, 1, 1)[0]
+                t_size = cv2.getTextSize(label_text, FONT_SIZE, 1, 1)[0]
                 c2 = c1[0] + t_size[0] + 3, c1[1] + t_size[1] + 4
                 cv2.rectangle(image, c1, c2, (r, g, b), -1)
-                cv2.putText(image, label_text, (c1[0], c1[1] + t_size[1] + 4), cv2.FONT_HERSHEY_PLAIN, 1, [255, 255, 255],
-                            1)
+                cv2.putText(image, label_text, (c1[0], c1[1] + t_size[1] + 4), FONT_SIZE, 1, LABEL_COLOR, 1)
 
             annot_time = (time.time() - start_time) * 1000  # convert to millis
             print_log_message(
