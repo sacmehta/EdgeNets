@@ -85,6 +85,9 @@ def main_images(predictor, model, object_names, in_dir, out_dir):
     jpg_file_names = glob.glob(in_dir + os.sep + '*.jpg')
     file_names = png_file_names + jpg_file_names
 
+    if len(file_names) == 0:
+        print_error_message('No image files in the folder')
+
     # model in eval mode
     model.eval()
     with torch.no_grad():
@@ -174,11 +177,11 @@ if __name__ == '__main__':
     parser.add_argument('--model', default='espnetv2', choices=['espnetv2'], type=str,
                         help='initialized model path')
     parser.add_argument('--s', default=2.0, type=float, help='Model scale factor')
-    parser.add_argument('--dataset', default='pascal', choices=detection_datasets,
+    parser.add_argument('--dataset', default='coco', choices=detection_datasets,
                         help='Name of the dataset si required to retrieve the correct object list')
     parser.add_argument('--weights-test', default='', help='model weights')
-    parser.add_argument('--im-size', default=300, type=int, help='Image size for training')
-    parser.add_argument('--im-dir', default='', type=str, help='Image file')
+    parser.add_argument('--im-size', default=512, type=int, help='Image size for training')
+    parser.add_argument('--im-dir', default='./sample_images', type=str, help='Image file')
     parser.add_argument('--save-dir', default='vis_detect', type=str, help='Directory where results will be stored')
     parser.add_argument('--live', action='store_true', default=False, help="Live detection")
 
