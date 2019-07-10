@@ -71,7 +71,40 @@ Below figure compares the performance of DiCENet with other efficient networks o
 
 Below figure compares the performance of ESPNet and ESPNetv2 on two different datasets. Note that ESPNets are one of the first efficient networks that delivers competitive performance to existing networks on the PASCAL VOC dataset, even with low resolution images say 256x256. See [here](model/segmentation/model_zoo/README.md) for more details.
 
-![ESPNets performance](/images/perf_espnet.png)
+<table>
+    <tr>
+        <td></td>
+        <td colspan=3 align="center"> Cityscapes</td>
+        <td colspan=3 align="center"> PASCAL VOC 2012 </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td align="center"> Image Size </td>
+        <td align="center"> FLOPs</td>
+        <td align="center"> mIOU </td>
+        <td align="center"> Image Size </td>
+        <td align="center"> FLOPs</td>
+        <td align="center"> mIOU </td>
+    </tr>
+    <tr>
+        <td> ESPNet</td>
+        <td align="center"> 1024x512 </td>
+        <td align="center"> 4.5 B</td>
+        <td align="center"> 60.3 </td>
+        <td align="center"> 512x512 </td>
+        <td align="center"> 2.2 B</td>
+        <td align="center"> 63 </td>
+    </tr>
+    <tr>
+        <td> ESPNetv2</td>
+        <td align="center"> 1024x512 </td>
+        <td align="center"> 2.7 B</td>
+        <td align="center"> <b>66.2</b> </td>
+        <td align="center"> 384x384 </td>
+        <td align="center"> 0.76 B</td>
+        <td align="center"> <b>68</b> </td>
+    </tr>
+</table>
 
 ## Training Receipe
 
