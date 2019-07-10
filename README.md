@@ -74,17 +74,17 @@ Below figure compares the performance of ESPNet and ESPNetv2 on two different da
 <table>
     <tr>
         <td></td>
-        <td colspan=3 align="center"> Cityscapes</td>
-        <td colspan=3 align="center"> PASCAL VOC 2012 </td>
+        <td colspan=3 align="center"> <b>Cityscapes</b></td>
+        <td colspan=3 align="center"> <b>PASCAL VOC 2012</b> </td>
     </tr>
     <tr>
         <td></td>
-        <td align="center"> Image Size </td>
-        <td align="center"> FLOPs</td>
-        <td align="center"> mIOU </td>
-        <td align="center"> Image Size </td>
-        <td align="center"> FLOPs</td>
-        <td align="center"> mIOU </td>
+        <td align="center"> <b>Image Size</b> </td>
+        <td align="center"> <b>FLOPs</b> </td>
+        <td align="center"> <b>mIOU</b> </td>
+        <td align="center"> <b>Image</b> Size </td>
+        <td align="center"> <b>FLOPs</b></td>
+        <td align="center"> <b>mIOU</b> </td>
     </tr>
     <tr>
         <td> ESPNet</td>
