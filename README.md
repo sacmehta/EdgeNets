@@ -10,7 +10,7 @@ This repo contains source code of our work on designing efficient networks for d
         <td colspan=2 align="center"><b>ESPNetv2 object detection results<b></td>
     </tr>
     <tr>
-        <td colspan=2>
+        <td colspan=2 align="center">
             <img src="images/espnetv2_detection_2.gif" alt="Demo 1"></img>
         </td>
     <tr>
