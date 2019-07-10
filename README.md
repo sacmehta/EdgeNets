@@ -7,14 +7,15 @@ This repo contains source code of our work on designing efficient networks for d
 
 <table>
     <tr>
-        <td colspan=3 align="center"><b>ESPNetv2 object detection results<b></td>
+        <td colspan=2 align="center"><b>ESPNetv2 object detection results<b></td>
     </tr>
     <tr>
-        <td>
-            <img src="images/espnetv2_detection_1.gif" alt="Demo 1"></img>
+        <td colspan=2>
+            <img src="images/espnetv2_detection_2.gif" alt="Demo 1"></img>
         </td>
+    <tr>
         <td>
-            <img src="images/espnetv2_detection_2.gif" alt="Demo 2"></img>
+            <img src="images/espnetv2_detection_1.gif" alt="Demo 2"></img>
         </td>
         <td>
             <img src="images/espnetv2_detection_3.gif" alt="Demo 3"></img>
