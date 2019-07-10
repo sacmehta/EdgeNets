@@ -67,6 +67,46 @@ Below figure compares the performance of DiCENet with other efficient networks o
 
 ![DiCENet performance on the ImageNet](/images/dicenet_imagenet.png)
 
+### Object detection
+
+Below table compares the performance of our architecture with other detection networks on the MS-COCO dataset. Our network is fast and accurate. More details [here](model/detection/model_zoo/README.md)
+
+<table>
+    <tr>
+        <td></td>
+        <td colspan=3 align="center"> <b>MSCOCO</b></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td align="center"> <b>Image Size</b> </td>
+        <td align="center"> <b>FLOPs</b> </td>
+        <td align="center"> <b>mIOU</b> </td>
+        <td align="center"> <b>FPS</b> </td>
+    </tr>
+    <tr>
+        <td> SSD-VGG</td>
+        <td align="center"> 512x512 </td>
+        <td align="center"> 100 B</td>
+        <td align="center"> 26.8 </td>
+        <td align="center"> 19 </td>
+    </tr>
+    <tr>
+        <td> YOLOv2</td>
+        <td align="center"> 544x544 </td>
+        <td align="center"> 17.5 B</td>
+        <td align="center"> 21.6 </td>
+        <td align="center"> 40 </td>
+    </tr>
+    <tr>
+        <td> ESPNetv2-SSD (Ours) </td>
+        <td align="center"> 512x512 </td>
+        <td align="center"> 3.2 B</td>
+        <td align="center"> 24.54 </td>
+        <td align="center"> 35 </td>
+    </tr>
+</table>
+
+
 ### Semantic Segmentation
 
 Below figure compares the performance of ESPNet and ESPNetv2 on two different datasets. Note that ESPNets are one of the first efficient networks that delivers competitive performance to existing networks on the PASCAL VOC dataset, even with low resolution images say 256x256. See [here](model/segmentation/model_zoo/README.md) for more details.
