@@ -4,10 +4,23 @@ This repo contains source code of our work on designing efficient networks for d
  1. Image classification (Single/multi-label)
  2. Semantic segmentation
  3. Object detection
-  
-| ESPNetv2 object detection ||
-| --- | --- | --- |
-| ![ESPNetv2 Object Detection](images/espnetv2_detection_1.gif) | ![ESPNetv2 Object Detection](images/espnetv2_detection_2.gif) | ![ESPNetv2 Object Detection](images/espnetv2_detection_3.gif) |
+
+<table>
+    <tr>
+        <td colspan=3><b>ESPNetv2 object detection results<b></td>
+    </tr>
+    <tr>
+        <td>
+            <img src="images/espnetv2_detection_1.gif" alt="Demo 1"></img>
+        </td>
+        <td>
+            <img src="images/espnetv2_detection_2.gif" alt="Demo 2"></img>
+        </td>
+        <td>
+            <img src="images/espnetv2_detection_3.gif" alt="Demo 3"></img>
+        </td>
+    </tr>
+</table>
 
     
 **Table of contents**
