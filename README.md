@@ -1,7 +1,21 @@
 # Efficient networks for Computer Vision
 
 This repo contains source code of our work on designing efficient networks for different computer vision tasks: <span style="color:blue"> (1) Image classification, (2) Object detection, and (3) Semantic segmentation.</span>
- 
+
+<table>
+    <tr>
+        <td colspan=2 align="center"><b>Real-time semantic segmentation using ESPNetv2 on iPhone7<b></td>
+    </tr>
+    <tr>
+        <td>
+            <img src="images/espnetv2_iphone7_video_1.gif" alt="Seg demo on iPhone7"></img>
+        </td>
+        <td>
+            <img src="images/espnetv2_iphone7_video_2.gif" alt="Seg demo on iPhone7"></img>
+        </td>
+    </tr>
+</table>
+
 <table>
     <tr>
         <td colspan=2 align="center"><b>Real-time object detection using ESPNetv2<b></td>
@@ -10,6 +24,7 @@ This repo contains source code of our work on designing efficient networks for d
         <td colspan=2 align="center">
             <img src="images/espnetv2_detection_2.gif" alt="Demo 1"></img>
         </td>
+    </tr>
     <tr>
         <td>
             <img src="images/espnetv2_detection_1.gif" alt="Demo 2"></img>
