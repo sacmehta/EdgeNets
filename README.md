@@ -4,7 +4,7 @@ This repo contains source code of our work on designing efficient networks for d
 
 <table>
     <tr>
-        <td colspan=2 align="center"><b>Real-time semantic segmentation using ESPNetv2 on iPhone7. See [here](https://github.com/sacmehta/ESPNetv2-COREML) for application source code using COREML.<b></td>
+        <td colspan=2 align="center"><b>Real-time semantic segmentation using ESPNetv2 on iPhone7. See <a href="https://github.com/sacmehta/ESPNetv2-COREML" target="_blank">here</a> for iOS application source code using COREML.<b></td>
     </tr>
     <tr>
         <td>
