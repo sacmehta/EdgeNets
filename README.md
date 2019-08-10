@@ -4,7 +4,7 @@ This repo contains source code of our work on designing efficient networks for d
 
 <table>
     <tr>
-        <td colspan=2 align="center"><b>Real-time semantic segmentation using ESPNetv2 on iPhone7<b></td>
+        <td colspan=2 align="center"><b>Real-time semantic segmentation using ESPNetv2 on iPhone7. See [here](https://github.com/sacmehta/ESPNetv2-COREML) for application source code using COREML.<b></td>
     </tr>
     <tr>
         <td>
@@ -54,6 +54,7 @@ This repo contains source code of our work on designing efficient networks for d
  * Supports PyTorch 1.0
  * Integrated with Tensorboard for easy visualization of training logs. 
  * Scripts for downloading different datasets.
+ * Semantic segmentation application using ESPNetv2 on iPhone can be found [here](https://github.com/sacmehta/ESPNetv2-COREML). 
 
 ## Supported networks
 This repo supports following networks:
