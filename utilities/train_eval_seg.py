@@ -40,9 +40,10 @@ def train_seg(model, dataset_loader, optimizer, criterion, num_classes, epoch, d
         union_meter.update(union)
 
         losses.update(loss.item(), inputs.size(0))
+
+        optimizer.zero_grad()
         loss.backward()
         optimizer.step()
-        optimizer.zero_grad()
 
         # measure elapsed time
         batch_time.update(time.time() - end)
