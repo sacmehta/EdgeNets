@@ -178,6 +178,26 @@ Details about training and testing are provided [here](README_Detection.md).
 
 Details about performance of different models are provided [here](model/detection/model_zoo/README.md).
 
+## Demonstrations
+
+To run the segmentation demo, just type:
+
+```
+python segmentation_demo.py
+```
+
+To run the detection demo, run the following command:
+``` 
+python detection_demo.py
+
+OR 
+
+python detection_demo.py --live
+```
+
+For other supported arguments, please see the corresponding files.
+
+
 ## Citation
 If you find this repository helpful, please feel free to cite our work:
 ```
