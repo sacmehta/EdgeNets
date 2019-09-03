@@ -43,9 +43,10 @@ This repo contains source code of our work on designing efficient networks for d
  4. [Blogs](#blogs)
  5. [Performance comparison](#performance-comparison)
  6. [Training receipe](#training-receipe)
- 7. [Citation](#citation)
- 8. [License](#license)
- 9. [Acknowledgements](#acknowledgements)
+ 7. [Instructions for segmentation and detection demos](#instructions-for-segmentation-and-detection-demos)
+ 8. [Citation](#citation)
+ 9. [License](#license)
+ 10. [Acknowledgements](#acknowledgements)
     
 ## Key highlights
  * Object classification on the ImageNet and MS-COCO (multi-label)
@@ -178,7 +179,7 @@ Details about training and testing are provided [here](README_Detection.md).
 
 Details about performance of different models are provided [here](model/detection/model_zoo/README.md).
 
-## Demonstrations
+## Instructions for segmentation and detection demos
 
 To run the segmentation demo, just type:
 
