@@ -47,6 +47,7 @@ This repo contains source code of our work on designing efficient networks for d
  8. [Citation](#citation)
  9. [License](#license)
  10. [Acknowledgements](#acknowledgements)
+ 11. [Contributions](#want-to-help-out)
     
 ## Key highlights
  * Object classification on the ImageNet and MS-COCO (multi-label)
@@ -232,3 +233,11 @@ By downloading this software, you acknowledge that you agree to the terms and co
 ## Acknowledgements
 Most of our object detection code is adapted from [SSD in pytorch](https://github.com/amdegroot/ssd.pytorch). We thank authors for such an amazing work.
 
+## Want to help out?
+Thanks for your interest in our work :).
+
+Open tasks that are interesting:
+ * Tensorflow implementation. I kind of wanna do this but not getting enough time. If you are interested, drop a message and we can talk about it.
+ * Optimizing the EESP and the DiceNet block at CUDA-level.
+ * Optimize and port pretrained models across multiple mobile platforms, including Android.
+ * Other thoughts are also welcome :).
