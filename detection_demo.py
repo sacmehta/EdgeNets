@@ -180,7 +180,7 @@ if __name__ == '__main__':
                         help='initialized model path')
     parser.add_argument('--s', default=2.0, type=float, help='Model scale factor')
     parser.add_argument('--dataset', default='coco', choices=detection_datasets,
-                        help='Name of the dataset si required to retrieve the correct object list')
+                        help='Name of the dataset is required to retrieve the correct object list')
     parser.add_argument('--weights-test', default='', help='model weights')
     parser.add_argument('--im-size', default=512, type=int, help='Image size for training')
     parser.add_argument('--im-dir', default='./sample_images', type=str, help='Image file')
