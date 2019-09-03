@@ -46,8 +46,9 @@ class CustomSegmentationDataset(torch.utils.data.Dataset):
             for line in lines:
                 # line is a comma separated file that contains mapping between RGB image and mask image
                 # <image1.jpg>, <image1.png>
-                rgb_img_loc = rgb_root_dir + os.sep + line.split()[0]
-                label_img_loc = label_root_dir + os.sep + line.split()[1]
+                line_split = line.split(',')
+                rgb_img_loc = rgb_root_dir + os.sep + line_split[0].strip()
+                label_img_loc = label_root_dir + os.sep + line_split[1].strip()
                 assert os.path.isfile(rgb_img_loc)
                 assert os.path.isfile(label_img_loc)
                 self.images.append(rgb_img_loc)
