@@ -12,6 +12,7 @@ from PIL import Image
 import cv2
 from utilities.color_map import VOCColormap
 import glob
+import gc
 
 
 COLOR_MAP = []
@@ -19,10 +20,10 @@ for cmap in VOCColormap().get_color_map():
     r, g, b = cmap
     COLOR_MAP.append((int(r), int(g), int(b)))
 
-FONT_SIZE = cv2.FONT_HERSHEY_SIMPLEX
+FONT_SIZE = cv2.FONT_HERSHEY_PLAIN
 LABEL_COLOR = [255, 255, 255]
-TEXT_THICKNESS = 2
-RECT_BORDER_THICKNESS=3
+TEXT_THICKNESS = 1
+RECT_BORDER_THICKNESS=2
 
 
 def main(args):
@@ -48,7 +49,7 @@ def main(args):
 
     cfg.NUM_CLASSES = num_classes
     # discard the boxes that have prediction score less than this value
-    cfg.conf_threshold = 0.4
+    cfg.conf_threshold = args.conf_threshold
 
     # -----------------------------------------------------------------------------
     # Model
@@ -64,7 +65,7 @@ def main(args):
     device = 'cuda' if num_gpus >= 1 else 'cpu'
 
     if num_gpus >= 1:
-        model = torch.nn.DataParallel(model)
+        #model = torch.nn.DataParallel(model)
         model = model.to(device)
         if torch.backends.cudnn.is_available():
             import torch.backends.cudnn as cudnn
@@ -74,15 +75,15 @@ def main(args):
     predictor = BoxPredictor(cfg=cfg, device=device)
 
     if args.live:
-        main_live(predictor=predictor, model=model, object_names=object_names)
+        main_live(predictor=predictor, model=model, object_names=object_names, device=device)
     else:
         if not os.path.isdir(args.save_dir):
             os.makedirs(args.save_dir)
         main_images(predictor=predictor, model=model, object_names=object_names,
-                    in_dir=args.im_dir, out_dir=args.save_dir)
+                    in_dir=args.im_dir, out_dir=args.save_dir, device=device)
 
 
-def main_images(predictor, model, object_names, in_dir, out_dir):
+def main_images(predictor, model, object_names, in_dir, out_dir, device='cuda'):
     png_file_names = glob.glob(in_dir + os.sep + '*.png')
     jpg_file_names = glob.glob(in_dir + os.sep + '*.jpg')
     file_names = png_file_names + jpg_file_names
@@ -99,6 +100,8 @@ def main_images(predictor, model, object_names, in_dir, out_dir):
             start_time = time.time()
 
             output = predictor.predict(model, image)
+            if device == 'cuda':
+                torch.cuda.synchronize()
             prediction_time = (time.time() - start_time) * 1000  # convert to millis
 
             start_time = time.time()
@@ -108,7 +111,7 @@ def main_images(predictor, model, object_names, in_dir, out_dir):
                 c1 = (int(coords[0]), int(coords[1]))
                 c2 = (int(coords[2]), int(coords[3]))
                 cv2.rectangle(image, c1, c2, (r, g, b), thickness=RECT_BORDER_THICKNESS)
-                label_text = '{label}: {score:.3f}'.format(label=object_names[label], score=score)
+                label_text = '{label}: {score:.2f}'.format(label=object_names[label], score=score)
                 t_size = cv2.getTextSize(label_text, FONT_SIZE, 1, TEXT_THICKNESS)[0]
                 c2 = c1[0] + t_size[0] + 3, c1[1] + t_size[1] + 4
                 cv2.rectangle(image, c1, c2, (r, g, b), -1)
@@ -122,9 +125,10 @@ def main_images(predictor, model, object_names, in_dir, out_dir):
 
             new_file_name = '{}/{}'.format(out_dir, img_name.split('/')[-1])
             cv2.imwrite(new_file_name, image)
+            gc.collect()
 
 
-def main_live(predictor, model, object_names):
+def main_live(predictor, model, object_names, device='cuda'):
 
     capture_device = cv2.VideoCapture(0)
     capture_device.set(3, 1920)
@@ -141,6 +145,8 @@ def main_live(predictor, model, object_names):
             start_time = time.time()
 
             output = predictor.predict(model, image)
+            if device == 'cuda':
+                torch.cuda.synchronize()
             # box prediction time
             prediction_time = (time.time() - start_time) * 1000
 
@@ -168,6 +174,7 @@ def main_live(predictor, model, object_names):
             cv2.imshow('EdgeNets', image)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
+            gc.collect()
 
         capture_device.release()
         cv2.destroyAllWindows()
@@ -186,6 +193,7 @@ if __name__ == '__main__':
     parser.add_argument('--im-dir', default='./sample_images', type=str, help='Image file')
     parser.add_argument('--save-dir', default='vis_detect', type=str, help='Directory where results will be stored')
     parser.add_argument('--live', action='store_true', default=False, help="Live detection")
+    parser.add_argument('--conf-threshold', type=float, default=0.3, help='Ignore boxes with value < conf-threshold')
 
     args = parser.parse_args()
 
