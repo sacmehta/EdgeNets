@@ -96,7 +96,7 @@ def main_images(predictor, model, object_names, in_dir, out_dir, device='cuda'):
     with torch.no_grad():
         for img_name in file_names:
             image = cv2.imread(img_name)
-
+            height, width, _ = image.shape
             start_time = time.time()
 
             output = predictor.predict(model, image)
@@ -108,8 +108,8 @@ def main_images(predictor, model, object_names, in_dir, out_dir, device='cuda'):
             boxes, labels, scores = [o.to("cpu").numpy() for o in output]
             for label, score, coords in zip(labels, scores, boxes):
                 r, g, b = COLOR_MAP[label]
-                c1 = (int(coords[0]), int(coords[1]))
-                c2 = (int(coords[2]), int(coords[3]))
+                c1 = (int(coords[0] * width), int(coords[1] * height))
+                c2 = (int(coords[2] * width), int(coords[3] * height))
                 cv2.rectangle(image, c1, c2, (r, g, b), thickness=RECT_BORDER_THICKNESS)
                 label_text = '{label}: {score:.2f}'.format(label=object_names[label], score=score)
                 t_size = cv2.getTextSize(label_text, FONT_SIZE, 1, TEXT_THICKNESS)[0]
@@ -141,7 +141,7 @@ def main_live(predictor, model, object_names, device='cuda'):
             ret, image = capture_device.read()
             if image is None:
                 continue
-
+            height, width, _ = image.shape
             start_time = time.time()
 
             output = predictor.predict(model, image)
@@ -155,8 +155,8 @@ def main_live(predictor, model, object_names, device='cuda'):
 
             for label, score, coords in zip(labels, scores, boxes):
                 r, g, b = COLOR_MAP[label]
-                c1 = (int(coords[0]), int(coords[1]))
-                c2 = (int(coords[2]), int(coords[3]))
+                c1 = (int(coords[0] * width), int(coords[1] * height))
+                c2 = (int(coords[2] * width), int(coords[3] * height))
                 cv2.rectangle(image, c1, c2, (r, g, b), thickness=RECT_BORDER_THICKNESS)
                 label_text = '{} {}'.format(object_names[label], int(score*100))
                 t_size = cv2.getTextSize(label_text, FONT_SIZE, 1, TEXT_THICKNESS)[0]

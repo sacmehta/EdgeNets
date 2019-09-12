@@ -26,7 +26,6 @@ class BoxPredictor(object):
         self.device = device
 
     def predict(self, model, image):
-        height, width, _ = image.shape
         image = self.transform(image)
         images = image.unsqueeze(0)
         images = images.to(self.device)
@@ -57,10 +56,7 @@ class BoxPredictor(object):
         # no object detected
         if not filtered_box_probs:
             return torch.empty(0, 4), torch.empty(0), torch.empty(0)
-        # concatenate all results
+
         filtered_box_probs = torch.cat(filtered_box_probs)
-        filtered_box_probs[:, 0] *= width
-        filtered_box_probs[:, 1] *= height
-        filtered_box_probs[:, 2] *= width
-        filtered_box_probs[:, 3] *= height
+
         return filtered_box_probs[:, :4], torch.tensor(filtered_labels), filtered_box_probs[:, 4]
