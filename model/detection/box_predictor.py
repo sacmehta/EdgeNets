@@ -25,7 +25,7 @@ class BoxPredictor(object):
         self.softmax = torch.nn.Softmax(dim=2)
         self.device = device
 
-    def predict(self, model, image):
+    def predict(self, model, image, is_scaling=True):
         height, width, _ = image.shape
         image = self.transform(image)
         images = image.unsqueeze(0)
@@ -59,8 +59,9 @@ class BoxPredictor(object):
             return torch.empty(0, 4), torch.empty(0), torch.empty(0)
         # concatenate all results
         filtered_box_probs = torch.cat(filtered_box_probs)
-        filtered_box_probs[:, 0] *= width
-        filtered_box_probs[:, 1] *= height
-        filtered_box_probs[:, 2] *= width
-        filtered_box_probs[:, 3] *= height
+        if is_scaling:
+            filtered_box_probs[:, 0] *= width
+            filtered_box_probs[:, 1] *= height
+            filtered_box_probs[:, 2] *= width
+            filtered_box_probs[:, 3] *= height
         return filtered_box_probs[:, :4], torch.tensor(filtered_labels), filtered_box_probs[:, 4]
