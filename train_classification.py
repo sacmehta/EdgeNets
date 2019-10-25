@@ -79,7 +79,7 @@ def main(args):
 
     # network properties
     num_params = model_parameters(model)
-    flops = compute_flops(model)
+    flops = compute_flops(model, input=torch.Tensor(1, 3, args.inpSize, args.inpSize))
     print_info_message('FLOPs: {:.2f} million'.format(flops))
     print_info_message('Network Parameters: {:.2f} million'.format(num_params))
 
