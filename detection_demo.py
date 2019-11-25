@@ -75,7 +75,7 @@ def main(args):
     predictor = BoxPredictor(cfg=cfg, device=device)
 
     if args.live:
-        main_live(predictor=predictor, model=model, object_names=object_names, device=device)
+        main_live(predictor=predictor, model=model, object_names=object_names, stream_url=args.stream, device=device)
     else:
         if not os.path.isdir(args.save_dir):
             os.makedirs(args.save_dir)
@@ -132,9 +132,9 @@ def main_images(predictor, model, object_names, in_dir, out_dir, device='cuda'):
             gc.collect()
 
 
-def main_live(predictor, model, object_names, device='cuda'):
+def main_live(predictor, model, object_names, stream_url, device='cuda'):
 
-    capture_device = cv2.VideoCapture(0)
+    capture_device = cv2.VideoCapture(stream_url)
     capture_device.set(3, 1920)
     capture_device.set(4, 1080)
 
@@ -205,7 +205,7 @@ if __name__ == '__main__':
     parser.add_argument('--save-dir', default='vis_detect', type=str, help='Directory where results will be stored')
     parser.add_argument('--live', action='store_true', default=False, help="Live detection")
     parser.add_argument('--conf-threshold', type=float, default=0.3, help='Ignore boxes with value < conf-threshold')
-
+    parser.add_argument('--stream', type=str, default=0, help='Stream url for live detection.')
     args = parser.parse_args()
 
     # This key is used to load the ImageNet weights while training. So, set to empty to avoid errors
