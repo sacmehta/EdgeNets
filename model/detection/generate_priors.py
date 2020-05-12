@@ -9,14 +9,16 @@ import torch
 import torch.nn as nn
 from math import sqrt
 
+
 class PriorBox(nn.Module):
     def __init__(self, cfg):
         super(PriorBox, self).__init__()
         self.image_size = cfg.image_size
         self.feature_maps = cfg.feature_maps
-        self.min_sizes = cfg.min_sizes
-        self.max_sizes = cfg.max_sizes
-        self.strides = cfg.strides
+        # self.min_sizes = cfg.min_sizes
+        # self.max_sizes = cfg.max_sizes
+        # self.strides = cfg.strides
+        self.scales = cfg.scales
         self.aspect_ratios = cfg.aspect_ratio
         self.clip = cfg.clip
 
@@ -29,29 +31,28 @@ class PriorBox(nn.Module):
         """
         priors = []
         for k, f in enumerate(self.feature_maps):
-            scale = self.image_size / self.strides[k]
             for i, j in product(range(f), repeat=2):
                 # unit center x,y
-                cx = (j + 0.5) / scale
-                cy = (i + 0.5) / scale
+                cx = (j + 0.5) / self.scales[k]
+                cy = (i + 0.5) / self.scales[k]
 
-                # small sized square box
-                size = self.min_sizes[k]
-                h = w = size / self.image_size
-                priors.append([cx, cy, w, h])
-
-                # big sized square box
-                size = sqrt(self.min_sizes[k] * self.max_sizes[k])
-                h = w = size / self.image_size
-                priors.append([cx, cy, w, h])
-
-                # change h/w ratio of the small sized box
-                size = self.min_sizes[k]
-                h = w = size / self.image_size
                 for ratio in self.aspect_ratios[k]:
-                    ratio = sqrt(ratio)
-                    priors.append([cx, cy, w * ratio, h / ratio])
-                    priors.append([cx, cy, w / ratio, h * ratio])
+                    priors.append(
+                        [
+                            cx,
+                            cy,
+                            self.scales[k] * sqrt(ratio),
+                            self.scales[k] / sqrt(ratio),
+                        ]
+                    )
+                    # If aspect ratio is 1 prior scale is geometric_mean of (scale of the current feature map, scale of the next feature map)
+                    if ratio == 1:
+                        try:
+                            extra_scale = sqrt(self.scales[k] * self.scales[k + 1])
+                        # last feature map scale is 1
+                        except IndexError:
+                            extra_scale = 1
+                        priors.append([cx, cy, extra_scale, extra_scale])
 
         priors = torch.Tensor(priors)
         if self.clip:
@@ -59,10 +60,11 @@ class PriorBox(nn.Module):
         return priors
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     from model.detection.ssd_config import SSD300Configuration as cfg
+
     center_form_priors = PriorBox(cfg)()
     from utilities import box_utils
+
     corner_form_priors = box_utils.center_form_to_corner_form(center_form_priors)
     print(corner_form_priors)
-
