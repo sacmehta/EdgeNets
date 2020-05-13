@@ -33,8 +33,8 @@ class PriorBox(nn.Module):
         for k, f in enumerate(self.feature_maps):
             for i, j in product(range(f), repeat=2):
                 # unit center x,y
-                cx = (j + 0.5) / self.scales[k]
-                cy = (i + 0.5) / self.scales[k]
+                cx = (j + 0.5) / self.feature_maps[k]
+                cy = (i + 0.5) / self.feature_maps[k]
 
                 for ratio in self.aspect_ratios[k]:
                     priors.append(
