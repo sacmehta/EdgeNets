@@ -72,7 +72,7 @@ We train our segmentation networks in two stages:
  * In the first stage, we use a low-resolution image as an input so that we can fit a larger batch-size. See below command
  ```
  # Cityscapes dataset
- CUDA_VISIBLE_DEVICES=0 python train_segmentation.py --model espnetv2 --s 2.0 --dataset city --data-path ./vision_datasets/cityscapes/ --batch-size 25 --crop-size 512 256 --model dicenet --s 1.75 --lr 0.009 --scheduler hybrid --clr-max 61 --epochs 100
+ CUDA_VISIBLE_DEVICES=0 python train_segmentation.py --model espnetv2 --s 2.0 --dataset city --data-path ./vision_datasets/cityscapes/ --batch-size 25 --crop-size 512 256 --lr 0.009 --scheduler hybrid --clr-max 61 --epochs 100
  # PASCAL VOC Dataset
  CUDA_VISIBLE_DEVICES=0 python train_segmentation.py --model espnetv2 --s 2.0 --dataset pascal --data-path ./vision_datasets/pascal_voc/VOCdevkit/ --coco-path ./vision_datasets/coco_preprocess --batch-size 40 --crop-size 256 256 --lr 0.009 --scheduler hybrid --clr-max 61 --epochs 100
  ```
