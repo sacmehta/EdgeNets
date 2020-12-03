@@ -48,6 +48,7 @@ This repo contains source code of our work on designing efficient networks for d
  9. [License](#license)
  10. [Acknowledgements](#acknowledgements)
  11. [Contributions](#want-to-help-out)
+ 12. [Notes](#notes)
     
 ## Key highlights
  * Object classification on the ImageNet and MS-COCO (multi-label)
@@ -203,11 +204,11 @@ For other supported arguments, please see the corresponding files.
 ## Citation
 If you find this repository helpful, please feel free to cite our work:
 ```
-@misc{mehta2019dicenet,
+@article{mehta2019dicenet,
 Author = {Sachin Mehta and Hannaneh Hajishirzi and Mohammad Rastegari},
 Title = {DiCENet: Dimension-wise Convolutions for Efficient Networks},
-Year = {2019},
-Eprint = {arXiv:1906.03516},
+Year = {2020},
+journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
 }
 
 @inproceedings{mehta2018espnetv2,
@@ -241,3 +242,8 @@ Open tasks that are interesting:
  * Optimizing the EESP and the DiceNet block at CUDA-level.
  * Optimize and port pretrained models across multiple mobile platforms, including Android.
  * Other thoughts are also welcome :).
+ 
+ ## Notes
+ 
+ ### Notes about DiCENet paper
+ This repository contains DiCENet's source code in PyTorch only and you should be able to reproduce the results of v1/v2 of our arxiv paper. To reproduce the results of our T-PAMI paper, you need to incorporate [MobileNet tricks in Section 5.3](https://arxiv.org/pdf/1906.03516.pdf), which are currently not a part of this repository. 
