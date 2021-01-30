@@ -19,7 +19,7 @@ def data_transform(img, im_size):
     return img
 
 def run_segmentation(args, model, image_list, device):
-    im_size = tuple(args.im_size)
+    #im_size = tuple(args.im_size)
 
     model.eval()
     with torch.no_grad():
@@ -27,6 +27,8 @@ def run_segmentation(args, model, image_list, device):
             img = Image.open(imgName).convert('RGB')
             img_clone = img.copy()
             w, h = img.size
+            
+            im_size = [(w // 32) * 32, (h // 32) * 32]
 
             img = data_transform(img, im_size)
             img = img.unsqueeze(0)  # add a batch dimension
