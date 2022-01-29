@@ -44,7 +44,7 @@ def main(args):
             print_info_message('Loading pretrained basenet model weights')
             model_dict = model.state_dict()
 
-            overlap_dict = {k: v for k, v in pretrained_dict if k in model_dict.items()}
+            overlap_dict = {k: v for k, v in model_dict.items() if k in pretrained_dict}
 
             total_size_overlap = 0
             for k, v in enumerate(overlap_dict):
