@@ -101,7 +101,7 @@ class DownSampler(nn.Module):
     the final output.
     '''
 
-    def __init__(self, nin, nout, k=4, r_lim=9, reinf=True):
+    def __init__(self, nin, nout, input2_nin=config_inp_reinf, k=4, r_lim=9, reinf=True):
         '''
             :param nin: number of input channels
             :param nout: number of output channels
@@ -115,7 +115,7 @@ class DownSampler(nn.Module):
         self.avg = nn.AvgPool2d(kernel_size=3, padding=1, stride=2)
         if reinf:
             self.inp_reinf = nn.Sequential(
-                CBR(config_inp_reinf, config_inp_reinf, 3, 1),
+                CBR(input2_nin, config_inp_reinf, 3, 1),
                 CB(config_inp_reinf, nout, 1, 1)
             )
         self.act =  nn.PReLU(nout)

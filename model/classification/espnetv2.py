@@ -57,19 +57,19 @@ class EESPNet(nn.Module):
 
         self.level1 = CBR(channels_in, out_channel_map[0], 3, 2)  # 112 L1
 
-        self.level2_0 = DownSampler(out_channel_map[0], out_channel_map[1], k=K[0], r_lim=recept_limit[0], reinf=self.input_reinforcement)  # out = 56
+        self.level2_0 = DownSampler(out_channel_map[0], out_channel_map[1], input2_nin=channels_in, k=K[0], r_lim=recept_limit[0], reinf=self.input_reinforcement)  # out = 56
 
-        self.level3_0 = DownSampler(out_channel_map[1], out_channel_map[2], k=K[1], r_lim=recept_limit[1], reinf=self.input_reinforcement) # out = 28
+        self.level3_0 = DownSampler(out_channel_map[1], out_channel_map[2], input2_nin=channels_in, k=K[1], r_lim=recept_limit[1], reinf=self.input_reinforcement) # out = 28
         self.level3 = nn.ModuleList()
         for i in range(reps_at_each_level[1]):
             self.level3.append(EESP(out_channel_map[2], out_channel_map[2], stride=1, k=K[2], r_lim=recept_limit[2]))
 
-        self.level4_0 = DownSampler(out_channel_map[2], out_channel_map[3], k=K[2], r_lim=recept_limit[2], reinf=self.input_reinforcement) #out = 14
+        self.level4_0 = DownSampler(out_channel_map[2], out_channel_map[3], input2_nin=channels_in, k=K[2], r_lim=recept_limit[2], reinf=self.input_reinforcement) #out = 14
         self.level4 = nn.ModuleList()
         for i in range(reps_at_each_level[2]):
             self.level4.append(EESP(out_channel_map[3], out_channel_map[3], stride=1, k=K[3], r_lim=recept_limit[3]))
 
-        self.level5_0 = DownSampler(out_channel_map[3], out_channel_map[4], k=K[3], r_lim=recept_limit[3]) #7
+        self.level5_0 = DownSampler(out_channel_map[3], out_channel_map[4], input2_nin=channels_in, k=K[3], r_lim=recept_limit[3]) #7
         self.level5 = nn.ModuleList()
         for i in range(reps_at_each_level[3]):
             self.level5.append(EESP(out_channel_map[4], out_channel_map[4], stride=1, k=K[4], r_lim=recept_limit[4]))
