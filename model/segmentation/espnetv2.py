@@ -47,7 +47,8 @@ class ESPNetv2Segmentation(nn.Module):
             2 * base_dec_planes,
             classes,
         ]
-        pyr_plane_proj = min(classes // 2, base_dec_planes)
+        # pyr_plane_proj = min(classes // 2, base_dec_planes)
+        pyr_plane_proj = base_dec_planes
 
         self.bu_dec_l1 = EfficientPyrPool(
             in_planes=config[3], proj_planes=pyr_plane_proj, out_planes=dec_planes[0]
@@ -145,6 +146,10 @@ class ESPNetv2Segmentation(nn.Module):
             self.bu_br_l3,
             self.bu_br_l2,
         ]
+
+        if self.aux_layer >= 0 and self.aux_layer < 3:
+            modules_seg.append(self.aux_decoder)
+
         for i in range(len(modules_seg)):
             for m in modules_seg[i].named_modules():
                 if (
