@@ -98,6 +98,17 @@ class ESPNetv2Segmentation(nn.Module):
 
         # self.upsample =  nn.Upsample(scale_factor=2, mode='bilinear', align_corners=True)
 
+        # Register 
+        self.activation = {}
+        def get_activation(name):
+            def hook(model, input, output):
+                self.activation[name] = output
+
+            return hook
+
+        self.bu_dec_l4.merge_layer[2].register_forward_hook(get_activation('output_main'))
+        self.aux_decoder.merge_layer[2].register_forward_hook(get_activation('output_aux'))
+
         self.init_params()
 
     def upsample(self, x):
@@ -218,6 +229,14 @@ class ESPNetv2Segmentation(nn.Module):
         bu_out = self.bu_br_l4(bu_out)
         bu_out = self.bu_dec_l4(bu_out)
 
+        #
+        # Feature
+        #
+        main_feature = F.interpolate(self.activation['output_main'], size=x_size, mode='bilinear')
+        aux_feature = F.interpolate(self.activation['output_aux'], size=x_size, mode='bilinear')
+
+        feature = torch.cat((main_feature, aux_feature), dim=1)
+
         return {
             "out": F.interpolate(
                 bu_out, size=x_size, mode="bilinear", align_corners=True
@@ -225,6 +244,7 @@ class ESPNetv2Segmentation(nn.Module):
             "aux": F.interpolate(
                 aux_out, size=x_size, mode="bilinear", align_corners=True
             ),
+            "feat": feature,
         }
 
 
