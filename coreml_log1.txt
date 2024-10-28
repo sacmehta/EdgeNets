@@ -1,0 +1,17 @@
+/home/ubuntu/ML/EdgeNets/nn_layers/eesp.py:139: TracerWarning: Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  if w2 == w1:
+/home/ubuntu/ML/EdgeNets/nn_layers/eesp.py:89: TracerWarning: Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  if expanded.size() == input.size():
+/home/ubuntu/ML/EdgeNets/nn_layers/efficient_pyramid_pool.py:41: TracerWarning: Converting a tensor to a Python float might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  h_s = int(math.ceil(height * self.scales[i]))
+/home/ubuntu/ML/EdgeNets/nn_layers/efficient_pyramid_pool.py:42: TracerWarning: Converting a tensor to a Python float might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  w_s = int(math.ceil(width * self.scales[i]))
+/home/ubuntu/ML/EdgeNets/nn_layers/cnn_utils.py:121: UserWarning: __floordiv__ is deprecated, and its behavior will change in a future version of pytorch. It currently rounds toward 0 (like the 'trunc' function NOT 'floor'). This results in incorrect rounding for negative values. To keep the current behavior, use torch.div(a, b, rounding_mode='trunc'), or for actual floor division, use torch.div(a, b, rounding_mode='floor').
+  channels_per_group = num_channels // self.groups
+When both 'convert_to' and 'minimum_deployment_target' not specified, 'convert_to' is set to "mlprogram" and 'minimum_deployment_target' is set to ct.target.iOS15 (which is same as ct.target.macOS12). Note: the model will not run on systems older than iOS15/macOS12/watchOS8/tvOS15. In order to make your model run on older system, please set the 'minimum_deployment_target' to iOS14/iOS13. Details please see the link: https://apple.github.io/coremltools/docs-guides/source/target-conversion-formats.html
+Converting PyTorch Frontend ==> MIL Ops: 100%|███████████████████████████████████████████████████▉| 1359/1360 [00:57<00:00, 23.69 ops/s]
+Running MIL frontend_pytorch pipeline: 100%|█████████████████████████████████████████████████████████| 5/5 [06:10<00:00, 74.16s/ passes]
+Running MIL default pipeline:  13%|███████▉                                                      | 10/78 [12:15<1:22:57, 73.19s/ passes]/home/ubuntu/anaconda3/envs/edgenets2/lib/python3.9/site-packages/coremltools/converters/mil/mil/passes/defs/preprocess.py:238: UserWarning: Input, 'x.1', of the source model, has been renamed to 'x_1' in the Core ML model.
+  warnings.warn(msg.format(var.name, new_name))
+/home/ubuntu/anaconda3/envs/edgenets2/lib/python3.9/site-packages/coremltools/converters/mil/mil/passes/defs/preprocess.py:266: UserWarning: Output, '2350', of the source model, has been renamed to 'var_2350' in the Core ML model.
+  warnings.warn(msg.format(var.name, new_name))

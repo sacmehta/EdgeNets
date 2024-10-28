@@ -5,6 +5,11 @@ __maintainer__ = "Sachin Mehta"
 
 import glob
 import os
+
+# The following 2 lines added for temporary fix
+import sys
+sys.path.append('/home/ubuntu/ML/EdgeNets')
+
 from utilities.print_utils import *
 
 def get_mappings(root_dir, files, annot_name):

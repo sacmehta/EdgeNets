@@ -97,6 +97,8 @@ def evaluate(args, model, image_list, device):
 
 
 def main(args):
+    # print(os.path.abspath(os.path.join(args.data_path, "leftImg8bit")))
+    # print([x[0] for x in os.walk(os.path.join(args.data_path, "leftImg8bit"))])
     # read all the images in the folder
     if args.dataset == 'city':
         image_path = os.path.join(args.data_path, "leftImg8bit", args.split, "*", "*.png")
@@ -118,12 +120,12 @@ def main(args):
                 image_list.append(rgb_img_loc)
     else:
         print_error_message('{} dataset not yet supported'.format(args.dataset))
-
+    
     if len(image_list) == 0:
         print_error_message('No files in directory: {}'.format(image_path))
 
     print_info_message('# of images for testing: {}'.format(len(image_list)))
-
+    
     if args.model == 'espnetv2':
         from model.segmentation.espnetv2 import espnetv2_seg
         args.classes = seg_classes

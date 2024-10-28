@@ -68,6 +68,7 @@ def main(args):
         print_error_message('Dataset: {} not yet supported'.format(args.dataset))
         exit(-1)
 
+    # exit(0)
     print_info_message('Training samples: {}'.format(len(train_dataset)))
     print_info_message('Validation samples: {}'.format(len(val_dataset)))
 
@@ -82,6 +83,7 @@ def main(args):
         print_error_message('Arch: {} not yet supported'.format(args.model))
         exit(-1)
 
+    # exit(0)
     if args.finetune:
         if os.path.isfile(args.finetune):
             print_info_message('Loading weights for finetuning from {}'.format(args.finetune))
@@ -197,6 +199,7 @@ def main(args):
         json.dump(arg_dict, outfile)
 
     extra_info_ckpt = '{}_{}_{}'.format(args.model, args.s, crop_size[0])
+    # exit(0)
     for epoch in range(start_epoch, args.epochs):
         lr_base = lr_scheduler.step(epoch)
         # set the optimizer with the learning rate
@@ -328,4 +331,7 @@ if __name__ == "__main__":
     args.savedir = '{}/model_{}_{}/s_{}_sch_{}_loss_{}_res_{}_sc_{}_{}/{}'.format(args.savedir, args.model, args.dataset, args.s,
                                                                          args.scheduler,
                                                                          args.loss_type, args.crop_size[0], args.scale[0], args.scale[1], timestr)
+    print(weight_file_key)
+    print(args)
+    exit(0)
     main(args)

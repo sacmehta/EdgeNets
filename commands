@@ -1,0 +1,149 @@
+# 1 Test
+## Command
+
+CUDA_VISIBLE_DEVICES=0 python test_segmentation.py --model espnetv2 --s 2.0 --dataset city --data-path ./vision_datasets/cityscapes/ --split val --im-size 1024 512 --weights-test ./model/segmentation/model_zoo/espnetv2/espnetv2_s_2.0_city_1024x512.pth
+
+## Output:
+2024-04-14 22:13:47 - INFO    - # of images for testing: 500
+2024-04-14 22:13:47 - WARNING - Training from scratch!!. If you are testing, ignore this message. For testing, we do not load weights here.
+2024-04-14 22:13:48 - INFO    - FLOPs for an input of size 1024x512: 2699.05 million
+2024-04-14 22:13:48 - INFO    - # of parameters: 0.789242
+2024-04-14 22:13:48 - INFO    - Loading model weights
+2024-04-14 22:13:48 - INFO    - Weight loaded successfully
+
+
+# 2 Train
+## Command
+CUDA_VISIBLE_DEVICES=0 python train_segmentation.py --model espnetv2 --s 2.0 --dataset city --data-path ./vision_datasets/cityscapes/ --batch-size 25 --crop-size 512 256 --lr 0.009 --scheduler hybrid --clr-max 61 --epochs 10
+
+## Output:
+2024-04-15 00:45:12 - LOGS    - Using scale = (0.25, 0.5)
+2024-04-15 00:45:12 - INFO    - Running Model at image resolution 512x256 with batch size 25
+2024-04-15 00:45:12 - INFO    - Training samples: 174
+2024-04-15 00:45:12 - INFO    - Validation samples: 267
+2024-04-15 00:45:15 - INFO    - Loading pretrained basenet model weights
+2024-04-15 00:45:15 - INFO    - 68.63 % of weights copied from basenet to segnet
+2024-04-15 00:45:15 - INFO    - Pretrained basenet model loaded!!
+2024-04-15 00:45:15 - INFO    - FLOPs for an input of size 512x256: 674.78 million
+2024-04-15 00:45:15 - INFO    - Network Parameters: 0.79 million
+2024-04-15 00:45:16.152436: I tensorflow/core/util/util.cc:169] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2024-04-15 00:45:16.156908: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory
+2024-04-15 00:45:16.156933: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+/home/ubuntu/ML/EdgeNets/nn_layers/eesp.py:139: TracerWarning: Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  if w2 == w1:
+/home/ubuntu/ML/EdgeNets/nn_layers/eesp.py:89: TracerWarning: Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  if expanded.size() == input.size():
+/home/ubuntu/ML/EdgeNets/nn_layers/efficient_pyramid_pool.py:41: TracerWarning: Converting a tensor to a Python float might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  h_s = int(math.ceil(height * self.scales[i]))
+/home/ubuntu/ML/EdgeNets/nn_layers/efficient_pyramid_pool.py:42: TracerWarning: Converting a tensor to a Python float might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  w_s = int(math.ceil(width * self.scales[i]))
+/home/ubuntu/ML/EdgeNets/nn_layers/cnn_utils.py:121: UserWarning: __floordiv__ is deprecated, and its behavior will change in a future version of pytorch. It currently rounds toward 0 (like the 'trunc' function NOT 'floor'). This results in incorrect rounding for negative values. To keep the current behavior, use torch.div(a, b, rounding_mode='trunc'), or for actual floor division, use torch.div(a, b, rounding_mode='floor').
+  channels_per_group = num_channels // self.groups
+2024-04-15 00:45:20 - INFO    - Scheduler HybirdLR
+    Total Epochs: 10
+    Cycle with length of 5: 12
+    Base LR with 5 cycle length: 0.009
+    Cycle with length of -50: 1
+    Base LR with -50 cycle length: 0.009
+
+2024-04-15 00:45:20 - INFO    - Running epoch 0 with learning rates: base_net 0.009000, segment_net 0.090000
+2024-04-15 00:45:28 - LOGS    - Epoch: 0[0/7]           Batch Time:7.9532               Loss:3.3879             miou:0.9402
+2024-04-15 00:45:38 - LOGS    - [0/11]          Batch Time:4.3946               Loss:2.7269             miou:2.0558
+2024-04-15 00:45:46 - LOGS    - [10/11]         Batch Time:1.0936               Loss:2.7076             miou:1.9853
+2024-04-15 00:45:46 - INFO    - Mean IoU: 1.99
+2024-04-15 00:45:46 - INFO    - Checkpoint saved at: ./results_segmentation/model_espnetv2_city/s_2.0_sch_hybrid_loss_ce_res_512_sc_0.25_0.5/20240415-004512/espnetv2_2.0_512_checkpoint.pth.tar
+2024-04-15 00:45:46 - INFO    - Running epoch 1 with learning rates: base_net 0.045000, segment_net 0.450000
+2024-04-15 00:45:52 - LOGS    - Epoch: 1[0/7]           Batch Time:6.0130               Loss:2.3509             miou:6.7152
+2024-04-15 00:46:01 - LOGS    - [0/11]          Batch Time:4.3743               Loss:2.6721             miou:6.8428
+2024-04-15 00:46:09 - LOGS    - [10/11]         Batch Time:1.0599               Loss:2.5194             miou:7.0313
+2024-04-15 00:46:09 - INFO    - Mean IoU: 7.03
+2024-04-15 00:46:09 - INFO    - Checkpoint saved at: ./results_segmentation/model_espnetv2_city/s_2.0_sch_hybrid_loss_ce_res_512_sc_0.25_0.5/20240415-004512/espnetv2_2.0_512_checkpoint.pth.tar
+2024-04-15 00:46:09 - INFO    - Running epoch 2 with learning rates: base_net 0.036000, segment_net 0.360000
+2024-04-15 00:46:14 - LOGS    - Epoch: 2[0/7]           Batch Time:5.4953               Loss:1.4662             miou:16.2935
+2024-04-15 00:46:24 - LOGS    - [0/11]          Batch Time:4.5314               Loss:2.7236             miou:10.9774
+2024-04-15 00:46:31 - LOGS    - [10/11]         Batch Time:1.0664               Loss:2.6241             miou:11.3370
+2024-04-15 00:46:31 - INFO    - Mean IoU: 11.34
+2024-04-15 00:46:31 - INFO    - Checkpoint saved at: ./results_segmentation/model_espnetv2_city/s_2.0_sch_hybrid_loss_ce_res_512_sc_0.25_0.5/20240415-004512/espnetv2_2.0_512_checkpoint.pth.tar
+2024-04-15 00:46:31 - INFO    - Running epoch 3 with learning rates: base_net 0.027000, segment_net 0.270000
+2024-04-15 00:46:37 - LOGS    - Epoch: 3[0/7]           Batch Time:5.6033               Loss:1.1342             miou:17.8573
+2024-04-15 00:46:46 - LOGS    - [0/11]          Batch Time:4.3004               Loss:2.5448             miou:12.3040
+2024-04-15 00:46:54 - LOGS    - [10/11]         Batch Time:1.0707               Loss:2.3773             miou:12.6901
+2024-04-15 00:46:54 - INFO    - Mean IoU: 12.69
+2024-04-15 00:46:54 - INFO    - Checkpoint saved at: ./results_segmentation/model_espnetv2_city/s_2.0_sch_hybrid_loss_ce_res_512_sc_0.25_0.5/20240415-004512/espnetv2_2.0_512_checkpoint.pth.tar
+2024-04-15 00:46:54 - INFO    - Running epoch 4 with learning rates: base_net 0.018000, segment_net 0.180000
+2024-04-15 00:46:59 - LOGS    - Epoch: 4[0/7]           Batch Time:5.4751               Loss:0.8456             miou:21.9045
+2024-04-15 00:47:08 - LOGS    - [0/11]          Batch Time:4.4581               Loss:1.9506             miou:14.0983
+2024-04-15 00:47:15 - LOGS    - [10/11]         Batch Time:1.0424               Loss:1.9040             miou:13.6636
+2024-04-15 00:47:16 - INFO    - Mean IoU: 13.66
+2024-04-15 00:47:16 - INFO    - Checkpoint saved at: ./results_segmentation/model_espnetv2_city/s_2.0_sch_hybrid_loss_ce_res_512_sc_0.25_0.5/20240415-004512/espnetv2_2.0_512_checkpoint.pth.tar
+2024-04-15 00:47:16 - INFO    - Running epoch 5 with learning rates: base_net 0.009000, segment_net 0.090000
+2024-04-15 00:47:21 - LOGS    - Epoch: 5[0/7]           Batch Time:5.4787               Loss:0.7527             miou:22.8888
+2024-04-15 00:47:31 - LOGS    - [0/11]          Batch Time:4.3869               Loss:1.5460             miou:15.8679
+2024-04-15 00:47:38 - LOGS    - [10/11]         Batch Time:1.0685               Loss:1.5416             miou:14.7500
+2024-04-15 00:47:38 - INFO    - Mean IoU: 14.75
+2024-04-15 00:47:38 - INFO    - Checkpoint saved at: ./results_segmentation/model_espnetv2_city/s_2.0_sch_hybrid_loss_ce_res_512_sc_0.25_0.5/20240415-004512/espnetv2_2.0_512_checkpoint.pth.tar
+2024-04-15 00:47:38 - INFO    - Running epoch 6 with learning rates: base_net 0.045000, segment_net 0.450000
+2024-04-15 00:47:44 - LOGS    - Epoch: 6[0/7]           Batch Time:5.4445               Loss:0.6899             miou:25.3246
+2024-04-15 00:47:53 - LOGS    - [0/11]          Batch Time:4.3021               Loss:2.3179             miou:14.1175
+2024-04-15 00:48:00 - LOGS    - [10/11]         Batch Time:1.0405               Loss:2.1443             miou:13.2918
+2024-04-15 00:48:00 - INFO    - Mean IoU: 13.29
+2024-04-15 00:48:00 - INFO    - Checkpoint saved at: ./results_segmentation/model_espnetv2_city/s_2.0_sch_hybrid_loss_ce_res_512_sc_0.25_0.5/20240415-004512/espnetv2_2.0_512_checkpoint.pth.tar
+2024-04-15 00:48:00 - INFO    - Running epoch 7 with learning rates: base_net 0.036000, segment_net 0.360000
+2024-04-15 00:48:06 - LOGS    - Epoch: 7[0/7]           Batch Time:5.5864               Loss:0.9212             miou:23.7596
+2024-04-15 00:48:15 - LOGS    - [0/11]          Batch Time:4.3825               Loss:2.0420             miou:13.7297
+2024-04-15 00:48:23 - LOGS    - [10/11]         Batch Time:1.0444               Loss:1.9196             miou:13.9116
+2024-04-15 00:48:23 - INFO    - Mean IoU: 13.91
+2024-04-15 00:48:23 - INFO    - Checkpoint saved at: ./results_segmentation/model_espnetv2_city/s_2.0_sch_hybrid_loss_ce_res_512_sc_0.25_0.5/20240415-004512/espnetv2_2.0_512_checkpoint.pth.tar
+2024-04-15 00:48:23 - INFO    - Running epoch 8 with learning rates: base_net 0.027000, segment_net 0.270000
+2024-04-15 00:48:28 - LOGS    - Epoch: 8[0/7]           Batch Time:5.4877               Loss:0.8036             miou:24.9309
+2024-04-15 00:48:38 - LOGS    - [0/11]          Batch Time:4.4421               Loss:1.5635             miou:16.5471
+2024-04-15 00:48:45 - LOGS    - [10/11]         Batch Time:1.0547               Loss:1.5005             miou:16.6659
+2024-04-15 00:48:45 - INFO    - Mean IoU: 16.67
+2024-04-15 00:48:45 - INFO    - Checkpoint saved at: ./results_segmentation/model_espnetv2_city/s_2.0_sch_hybrid_loss_ce_res_512_sc_0.25_0.5/20240415-004512/espnetv2_2.0_512_checkpoint.pth.tar
+2024-04-15 00:48:45 - INFO    - Running epoch 9 with learning rates: base_net 0.018000, segment_net 0.180000
+2024-04-15 00:48:51 - LOGS    - Epoch: 9[0/7]           Batch Time:5.4940               Loss:0.6868             miou:27.7793
+2024-04-15 00:49:00 - LOGS    - [0/11]          Batch Time:4.4225               Loss:1.5376             miou:16.5798
+2024-04-15 00:49:07 - LOGS    - [10/11]         Batch Time:1.0583               Loss:1.4825             miou:17.5856
+2024-04-15 00:49:07 - INFO    - Mean IoU: 17.59
+2024-04-15 00:49:08 - INFO    - Checkpoint saved at: ./results_segmentation/model_espnetv2_city/s_2.0_sch_hybrid_loss_ce_res_512_sc_0.25_0.5/20240415-004512/espnetv2_2.0_512_checkpoint.pth.tar
+
+
+# 3 Test Trained Model
+CUDA_VISIBLE_DEVICES=0 python test_segmentation.py --model espnetv2 --s 2.0 --dataset city --data-path ./vision_datasets/cityscapes/ --split val --im-size 1024 512 --weights-test results_segmentation/model_espnetv2_city/s_2.0_sch_hybrid_loss_ce_res_512_sc_0.25_0.5/20240415-004512/espnetv2_2.0_512_best.pth
+
+
+4. Test with Debugging
+
+CUDA_VISIBLE_DEVICES=0 python -m debugpy --listen localhost:5679 --wait-for-client test_segmentation.py --model espnetv2 --s 2.0 --dataset city --data-path ./vision_datasets/cityscapes/ --split val --im-size 1024 512 --weights-test ./model/segmentation/model_zoo/espnetv2/espnetv2_s_2.0_city_1024x512.pth
+
+
+5. Save with CoreML
+
+CUDA_VISIBLE_DEVICES=0 python core_ml_conversion.py --model espnetv2 --s 2.0 --dataset city --data-path ./vision_datasets/cityscapes/ --split val --im-size 512 256 --weights-test ./model/segmentation/model_zoo/espnetv2/espnetv2_s_2.0_city_512x256.pth
+
+
+Failed to load _MLModelProxy: No module named 'coremltools.libcoremlpython'
+2024-06-07 21:47:22 - INFO    - # of images for testing: 267
+2024-06-07 21:47:22 - WARNING - Training from scratch!!. If you are testing, ignore this message. For testing, we do not load weights here.
+2024-06-07 21:47:22 - INFO    - FLOPs for an input of size 512x256: 674.78 million
+2024-06-07 21:47:22 - INFO    - # of parameters: 0.789242
+2024-06-07 21:47:22 - INFO    - Loading model weights
+2024-06-07 21:47:22 - INFO    - Weight loaded successfully
+/home/ubuntu/ML/EdgeNets/nn_layers/eesp.py:139: TracerWarning: Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  if w2 == w1:
+/home/ubuntu/ML/EdgeNets/nn_layers/eesp.py:89: TracerWarning: Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  if expanded.size() == input.size():
+/home/ubuntu/ML/EdgeNets/nn_layers/efficient_pyramid_pool.py:41: TracerWarning: Converting a tensor to a Python float might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  h_s = int(math.ceil(height * self.scales[i]))
+/home/ubuntu/ML/EdgeNets/nn_layers/efficient_pyramid_pool.py:42: TracerWarning: Converting a tensor to a Python float might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  w_s = int(math.ceil(width * self.scales[i]))
+/home/ubuntu/ML/EdgeNets/nn_layers/cnn_utils.py:121: UserWarning: __floordiv__ is deprecated, and its behavior will change in a future version of pytorch. It currently rounds toward 0 (like the 'trunc' function NOT 'floor'). This results in incorrect rounding for negative values. To keep the current behavior, use torch.div(a, b, rounding_mode='trunc'), or for actual floor division, use torch.div(a, b, rounding_mode='floor').
+  channels_per_group = num_channels // self.groups
+When both 'convert_to' and 'minimum_deployment_target' not specified, 'convert_to' is set to "mlprogram" and 'minimum_deployment_target' is set to ct.target.iOS15 (which is same as ct.target.macOS12). Note: the model will not run on systems older than iOS15/macOS12/watchOS8/tvOS15. In order to make your model run on older system, please set the 'minimum_deployment_target' to iOS14/iOS13. Details please see the link: https://apple.github.io/coremltools/docs-guides/source/target-conversion-formats.html
+Converting PyTorch Frontend ==> MIL Ops: 100%|█████████████████████████████████████████████████████████▉| 1359/1360 [00:59<00:00, 22.93 ops/s]
+Running MIL frontend_pytorch pipeline:  40%|█████████████████████████▏                                     | 2/5 [02:23<03:35, 71.81s/ passes]Running MIL frontend_pytorch pipeline: 100%|███████████████████████████████████████████████████████████████| 5/5 [05:59<00:00, 71.96s/ passes]
+Running MIL default pipeline:  13%|████████▋                                                           | 10/78 [11:58<1:21:17, 71.72s/ passes]/home/ubuntu/anaconda3/envs/edgenets2/lib/python3.9/site-packages/coremltools/converters/mil/mil/passes/defs/preprocess.py:238: UserWarning: Input, 'x.1', of the source model, has been renamed to 'x_1' in the Core ML model.
+  warnings.warn(msg.format(var.name, new_name))
+/home/ubuntu/anaconda3/envs/edgenets2/lib/python3.9/site-packages/coremltools/converters/mil/mil/passes/defs/preprocess.py:266: UserWarning: Output, '2350', of the source model, has been renamed to 'var_2350' in the Core ML model.
+  warnings.warn(msg.format(var.name, new_name))
+Running MIL default pipeline:  15%|██████████▍             

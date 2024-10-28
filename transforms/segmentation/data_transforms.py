@@ -49,7 +49,8 @@ class RandomScale(object):
         rand_log_scale = math.log(self.scale[0], 2) + random.random() * (math.log(self.scale[1], 2) - math.log(self.scale[0], 2))
         random_scale = math.pow(2, rand_log_scale)
         new_size = (int(round(w * random_scale)), int(round(h * random_scale)))
-        rgb_img = rgb_img.resize(new_size, Image.ANTIALIAS)
+        # Changed from ANTIALIAS to LANCZOS
+        rgb_img = rgb_img.resize(new_size, Image.LANCZOS)
         label_img = label_img.resize(new_size, Image.NEAREST)
         return rgb_img, label_img
 
@@ -128,7 +129,8 @@ class RandomResizedCrop(object):
         rgb_img = F.crop(rgb_img, i, j, h, w)
         label_img = F.crop(label_img, i, j, h, w)
 
-        rgb_img = rgb_img.resize(self.size, Image.ANTIALIAS)
+        # Changed from ANTIALIAS to LANCZOS
+        rgb_img = rgb_img.resize(self.size, Image.LANCZOS)
         label_img = label_img.resize(self.size, Image.NEAREST)
 
         return rgb_img, label_img

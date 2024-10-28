@@ -2,3 +2,5 @@
 __pycache__
 .DS_STORE
 .idea
+
+/vision_datasets

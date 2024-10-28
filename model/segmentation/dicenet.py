@@ -159,9 +159,9 @@ class DiCENetSegmentation(nn.Module):
         return F.interpolate(bu_out_128x128, size=x_size, mode='bilinear', align_corners=True) #nn.Upsample(x_size, mode='bilinear', align_corners=True)(bu_out_128x128)
 
 
-def dicenet_seg(args, classes):
+def dicenet_seg(args):
     weights = args.weights
-    model = DiCENetSegmentation(args, classes=classes)
+    model = DiCENetSegmentation(args, classes=args.classes)
     if weights:
         import os
         if os.path.isfile(weights):
@@ -183,7 +183,8 @@ def dicenet_seg(args, classes):
         model.base_net.load_state_dict(basenet_dict)
         print_log_message('Pretrained basenet model loaded!!')
     else:
-        print_warning_message('Training from scratch!!')
+        print_warning_message('Training from scratch!!. If you are testing, ignore this message.'
+                              ' For testing, we do not load weights here.')
     return model
 
 if __name__ == "__main__":

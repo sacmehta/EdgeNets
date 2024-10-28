@@ -165,9 +165,8 @@ class ESPNetv2Segmentation(nn.Module):
 
 def espnetv2_seg(args):
     classes = args.classes
-    scale=args.s
     weights = args.weights
-    dataset=args.dataset
+    dataset = args.dataset
     model = ESPNetv2Segmentation(args, classes=classes, dataset=dataset)
     if weights:
         import os
@@ -179,18 +178,11 @@ def espnetv2_seg(args):
             print_error_message('Weight file does not exist at {}. Please check. Exiting!!'.format(weights))
             exit()
         print_info_message('Loading pretrained basenet model weights')
-        basenet_dict = model.base_net.state_dict()
-        model_dict = model.state_dict()
-        overlap_dict = {k: v for k, v in pretrained_dict.items() if k in basenet_dict}
-        if len(overlap_dict) == 0:
-            print_error_message('No overlaping weights between model file and pretrained weight file. Please check')
-            exit()
-        print_info_message('{:.2f} % of weights copied from basenet to segnet'.format(len(overlap_dict) * 1.0/len(model_dict) * 100))
-        basenet_dict.update(overlap_dict)
-        model.base_net.load_state_dict(basenet_dict)
+        model.load_state_dict(pretrained_dict)
         print_info_message('Pretrained basenet model loaded!!')
     else:
-        print_warning_message('Training from scratch!!')
+        print_warning_message('Training from scratch!!. If you are testing, ignore this message.'
+                              ' For testing, we do not load weights here.')
     return model
 
 if __name__ == "__main__":

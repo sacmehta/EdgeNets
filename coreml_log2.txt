@@ -1,0 +1,9 @@
+Converting PyTorch Frontend ==> MIL Ops: 100%|██████████████████████████████████████████████████▉| 1359/1360 [00:58<00:00, 23.33 ops/s]
+Running MIL frontend_pytorch pipeline: 100%|████████████████████████████████████████████████████████| 5/5 [06:08<00:00, 73.64s/ passes]
+Running MIL default pipeline:  13%|████████                                                     | 10/76 [12:22<1:22:33, 75.06s/ passes]
+/home/ubuntu/anaconda3/envs/edgenets3/lib/python3.9/site-packages/coremltools/converters/mil/mil/passes/defs/preprocess.py:238: UserWarning: Input, 'x.1', of the source model, has been renamed to 'x_1' in the Core ML model.
+  warnings.warn(msg.format(var.name, new_name))
+/home/ubuntu/anaconda3/envs/edgenets3/lib/python3.9/site-packages/coremltools/converters/mil/mil/passes/defs/preprocess.py:266: UserWarning: Output, '2350', of the source model, has been renamed to 'var_2350' in the Core ML model.
+  warnings.warn(msg.format(var.name, new_name))
+Running MIL default pipeline:  33%|████████████████████                                         | 25/76 [30:52<1:02:36, 73.66s/ passes]
+Running MIL default pipeline:  50%|███████████████████████████████▌                               | 38/76 [47:35<47:59, 75.79s/ passes]
